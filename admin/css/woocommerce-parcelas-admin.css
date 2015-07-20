@@ -1,0 +1,25 @@
+/*.settings_page_fswp .section form{
+	position: relative;
+}
+.settings_page_fswp .section form h3{
+	float: left;
+	margin: 0 10px 0 0;
+	cursor: pointer;
+	opacity: 0.8;
+	padding: 5px 10px;
+	background-color: #dddddd;
+	border-bottom: 2px solid;
+}
+.settings_page_fswp .section form h3.fs_active{
+	opacity: 1;
+	background-color: #bbbbbb;
+}
+.settings_page_fswp .section form h3.fs_active + table{
+	display: block;
+	display: block;
+	position: absolute;
+	top: 40px;
+}
+.settings_page_fswp .section form table{
+	display: none;	
+}*/
