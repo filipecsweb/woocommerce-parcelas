@@ -103,7 +103,7 @@ class WC_Parcelas{
 	 * Call plugin action links
 	 *
 	 * @param 	$links
-	 * @return 	array
+	 * @return 	array 	$links
 	 */
 	public function plguin_action_links($links){
 		$settings_url = admin_url('options-general.php?page=fswp');
