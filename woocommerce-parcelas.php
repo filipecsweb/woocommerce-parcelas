@@ -5,7 +5,7 @@
  * Description: Adiciona quantidade de parcelas e o valor de cada parcela, nas páginas que listam todos os produtos e na página individual de cada produto.
  * Author: Filipe Seabra
  * Author URI: //www.filipecsweb.com.br/
- * Version: 1.2.5.2
+ * Version: 1.2.5.4
  * License: GPLv2 or later
  * License URI: //www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: woocommerce-parcelas
@@ -18,7 +18,7 @@ if(!defined('ABSPATH')){
 
 define('WC_PARCELAS_PATH',	plugin_dir_path(__FILE__));
 define('WC_PARCELAS_URL',	plugin_dir_url(__FILE__));
-define('WC_PARCELAS_VERSION', '1.2.5.2');
+define('WC_PARCELAS_VERSION', '1.2.5.4');
 define('PLUGIN_NAME', 'woocommerce-parcelas');
 
 /**
@@ -75,7 +75,7 @@ class WC_Parcelas{
 		/**
 		 * Add plugin Stylesheet and JavaScript, in admin
 		 */
-		add_action('admin_enqueue_scripts', array($this, 'admin_stylesheets_and_javascript'));
+		add_action('admin_enqueue_scripts', array($this, 'admin_stylesheet_and_javascript'));
 
 		/**
 		 * Include plugin files
@@ -116,7 +116,11 @@ class WC_Parcelas{
 	/**
 	 * Load plugin Stylesheet and JavaScript
 	 */
-	public function admin_stylesheets_and_javascript(){
+	public function admin_stylesheet_and_javascript($hook){
+		if('woocommerce_page_fswp' != $hook){
+			return;
+		}
+
 		/**
 		 * Call plugin Stylesheet
 		 */
