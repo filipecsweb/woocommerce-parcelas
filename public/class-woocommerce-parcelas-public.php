@@ -4,7 +4,7 @@
  *
  * @since    1.0.0
  * @author   Filipe Seabra
- * @version  1.2.5
+ * @version  1.2.5.1
  */
 class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
     public function __construct(){
@@ -35,41 +35,44 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
      * @return string with the installments price based in installments quantity.
      */
     public function fswp_calc(){
-        $product = get_product();
-
         $fswp_settings = get_option($this->option_name);
 
-        $fswp_prefixo = $fswp_settings['fswp_prefixo']; // Prefixo
-        $fswp_parcelas = $fswp_settings['fswp_parcelas']; // Qtde de parcelas
-        $fswp_sufixo = $fswp_settings['fswp_sufixo']; // Sufixo
-        $fswp_valor_minimo = isset($fswp_settings['fswp_valor_minimo']) ? str_replace(',', '.', $fswp_settings['fswp_valor_minimo']) : 0; // Valor mínimo
+        $prefixo = $fswp_settings['fswp_prefixo']; // Prefixo
+        $parcelas = $fswp_settings['fswp_parcelas']; // Qtde de parcelas
+        $sufixo = $fswp_settings['fswp_sufixo']; // Sufixo
+        $valor_minimo = isset($fswp_settings['fswp_valor_minimo']) ? str_replace(',', '.', $fswp_settings['fswp_valor_minimo']) : 0; // Valor mínimo
+
+        /**
+         * Get product data
+         */
+        $product = get_product();       
 
         if($product->has_child()){
             if($product->get_variation_price('min') != $product->get_variation_price('max')){
-                $fswp_prefixo = apply_filters('variable_product_with_different_prices_prefix', __('A partir de', 'woocommerce-parcelas'));
+                $prefixo = apply_filters('variable_product_with_different_prices_prefix', __('A partir de', 'woocommerce-parcelas'));
             }
         }
 
         if($product->get_price_including_tax()){
             $preco = $product->get_price_including_tax();
 
-            if($preco <= $fswp_valor_minimo){
+            if($preco <= $valor_minimo){
                 $output = '';
             }
-            elseif($preco > $fswp_valor_minimo){
-                $preco_parcelado = $preco / $fswp_parcelas;
-                $preco_parcelado_formatado = woocommerce_price($preco / $fswp_parcelas);
+            elseif($preco > $valor_minimo){
+                $preco_parcelado = $preco / $parcelas;
+                $preco_parcelado_formatado = woocommerce_price($preco / $parcelas);
 
-                if($preco_parcelado < $fswp_valor_minimo){
-                    while($fswp_parcelas > 1 && $preco_parcelado < $fswp_valor_minimo){
-                        $fswp_parcelas--;
-                        $preco_parcelado = $preco / $fswp_parcelas;
-                        $preco_parcelado_formatado = woocommerce_price($preco / $fswp_parcelas);
+                if($preco_parcelado < $valor_minimo){
+                    while($parcelas > 1 && $preco_parcelado < $valor_minimo){
+                        $parcelas--;
+                        $preco_parcelado = $preco / $parcelas;
+                        $preco_parcelado_formatado = woocommerce_price($preco / $parcelas);
                     }
 
-                    if($preco_parcelado > $fswp_valor_minimo){
+                    if($preco_parcelado > $valor_minimo){
                         $output  = "<div class='fswp_calc_wrapper'>";
-                        $output .= "<p class='price fswp_calc'>".sprintf(__('<span class="fswp_prefixo">%s %sx de</span> ', 'woocommerce-parcelas'), $fswp_prefixo, $fswp_parcelas).$preco_parcelado_formatado." <span class='fswp_sufixo'>".$fswp_sufixo."</span></p>";
+                        $output .= "<p class='price fswp_calc'>".sprintf(__('<span class="fswp_prefixo">%s %sx de</span> ', 'woocommerce-parcelas'), $prefixo, $parcelas).$preco_parcelado_formatado." <span class='fswp_sufixo'>".$sufixo."</span></p>";
                         $output .= "</div>";                    
                     }
                     else{
@@ -78,7 +81,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
                 }
                 else{
                     $output  = "<div class='fswp_calc_wrapper'>";
-                    $output .= "<p class='price fswp_calc'>".sprintf(__('<span class="fswp_prefixo">%s %sx de </span>', 'woocommerce-parcelas'), $fswp_prefixo, $fswp_parcelas).$preco_parcelado_formatado." <span class='fswp_sufixo'>".$fswp_sufixo."</span></p>";
+                    $output .= "<p class='price fswp_calc'>".sprintf(__('<span class="fswp_prefixo">%s %sx de </span>', 'woocommerce-parcelas'), $prefixo, $parcelas).$preco_parcelado_formatado." <span class='fswp_sufixo'>".$sufixo."</span></p>";
                     $output .= "</div>";
                 }      
             }            
@@ -129,18 +132,18 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
         $fswp_settings = get_option($this->option_name);
 
         if($product->get_variation_price('min') != $product->get_variation_price('max')){
-            $fswp_x_de = __('x de', 'woocommerce-parcelas');
+            $x_de = __('x de', 'woocommerce-parcelas');
             $sep_dec = get_option('woocommerce_price_decimal_sep');
             $sep_mil = get_option('woocommerce_price_thousand_sep');
             $cur_symbol = get_woocommerce_currency_symbol();            
     ?>
             <script type="text/javascript">
                 // Below variables are being used on variable.js file
-                var fswp_prefixo = <?php echo "'".$fswp_settings['fswp_prefixo']."'"; ?>;
-                var fswp_parcelas = <?php echo $fswp_settings['fswp_parcelas']; ?>;
-                var fswp_sufixo = <?php echo "'".$fswp_settings['fswp_sufixo']."'"; ?>;
-                var fswp_valor_minimo = <?php echo $fswp_settings['fswp_valor_minimo']; ?>;                
-                var fswp_x_de = <?php echo "'".$fswp_x_de."'"; ?>;
+                var prefixo = <?php echo "'".$fswp_settings['fswp_prefixo']."'"; ?>;
+                var parcelas = <?php echo $fswp_settings['fswp_parcelas']; ?>;
+                var sufixo = <?php echo "'".$fswp_settings['fswp_sufixo']."'"; ?>;
+                var valor_minimo = <?php echo isset($fswp_settings['fswp_valor_minimo']) ? str_replace(',', '.', $fswp_settings['fswp_valor_minimo']) : 0; ?>;                
+                var x_de = <?php echo "'".$x_de."'"; ?>;
                 var sep_dec = <?php echo "'".$sep_dec."'"; ?>;
                 var sep_mil = <?php echo "'".$sep_mil."'"; ?>;
                 var cur_symbol = <?php echo "'".$cur_symbol."'"; ?>
@@ -155,8 +158,8 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
                    return s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "");
                  };       
             </script>
+            <script type="text/javascript" src="<?php echo WC_PARCELAS_URL.'public/js/woocommerce-parcelas-variable.js' ?>"></script>
     <?php
-            wp_enqueue_script('woocommerce-parcelas-variable', WC_PARCELAS_URL.'public/js/woocommerce-parcelas-variable.js', WC_PARCELAS_VERSION, false, true);
         }
     }
 }

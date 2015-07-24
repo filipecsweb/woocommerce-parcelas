@@ -4,7 +4,7 @@
  *
  * @since 	1.0.0
  * @author   Filipe Seabra <eu@filipecsweb.com.br>
- * @version  1.2.5
+ * @version  1.2.5.1
  */
 class Woocommerce_Parcelas_Settigns{
 	/**
@@ -30,53 +30,27 @@ class Woocommerce_Parcelas_Settigns{
 	 * Load settings page menu
 	 */
 	public function fswp_admin_menu(){
-		add_submenu_page('woocommerce', __('Quantidade e pre&ccedil;o de parcelas', 'woocommerce-parcelas'), __('Parcelas', 'woocommerce-parcelas'), 'manage_options', $this->page, array($this, 'fswp_page_callback'));
-		// add_options_page( $page_title, $menu_title, $capability, $menu_slug, $function);
+		add_submenu_page(
+			'woocommerce',
+			__('Quantidade e pre&ccedil;o de parcelas',	'woocommerce-parcelas'),
+			__('Parcelas', 'woocommerce-parcelas'),
+			'manage_options',
+			$this->page, 
+			array($this, 'fswp_page_callback')
+		);
 	}
 
 	/**
 	 * Output the content for settings page
 	 */
 	public function fswp_page_callback(){
-	?>
-		<div class="section">
-			<form action="options.php" method="post">
-				<?php settings_fields($this->option_group); ?>
-				<?php // settings_fields( $option_group ); ?>
-
-				<?php do_settings_sections($this->page); ?>
-				<?php // do_settings_sections( $page ); ?>
-
-				<?php submit_button(); ?>
-			</form>		
-		</div>
-		<div class="section">
-			<div class="fswp_rodape">
-				<p>Achou a ferramenta útil? Faça uma doação... assim você ajuda com a manutenção e criação de todos os projetos gratuitos.</p>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="QM6NM5RMLQ9L4">
-					<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Doe para FilipeCS Web">
-					<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-				</form>
-				<hr />
-				<?php echo '<a class="button-secondary" href="//filipecsweb.com.br/?p=43" target="_blank">' . __('Bugs e Sugestões', 'woocommerce-parcelas') . '</a>'; ?>
-			</div>
-		</div>
-	<?php
+		include_once 'html-settings-page.php';
 	}
 
 	/**
 	 * Create the content for settings page
 	 */
 	public function fswp_page_settings(){
-		register_setting(
-			$this->option_group, 
-			$this->option_name, 
-			array($this, 'fswp_options_sanitize')
-		);
-		// register_setting( $option_group, $option_name, $sanitize_callback );
-
 		add_settings_section(
 			'fswp_general_section', 
 			__('Geral', 'woocommerce-parcelas'), 
@@ -157,6 +131,13 @@ class Woocommerce_Parcelas_Settigns{
 			)
 		);
 		// add_settings_field( $id, $title, $callback, $page, $section, $args );
+
+		register_setting(
+			$this->option_group, 
+			$this->option_name, 
+			array($this, 'fswp_options_sanitize')
+		);
+		// register_setting( $option_group, $option_name, $sanitize_callback );
 	}
 
 	public function fswp_general_section_callback(){}
