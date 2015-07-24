@@ -67,6 +67,9 @@ Ainda não, em breve...
 
 == Changelog ==
 
+= 1.2.5.3 =
+* Settings link below plugin name was fixed.
+
 = 1.2.5.1 =
 * Minimum value, with comma, wasn't working in variable product.
 
