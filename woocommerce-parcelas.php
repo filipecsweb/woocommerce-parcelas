@@ -106,7 +106,7 @@ class WC_Parcelas{
 	 * @return 	array 	$links
 	 */
 	public function plguin_action_links($links){
-		$settings_url = admin_url('options-general.php?page=fswp');
+		$settings_url = admin_url('admin.php?page=fswp');
 
 		$links[] = '<a href="'.esc_url($settings_url).'">'.__('Settings', 'woocommerce').'</a>';
 
