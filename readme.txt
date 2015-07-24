@@ -66,6 +66,9 @@ Ainda não, em breve...
 
 == Changelog ==
 
+= 1.2.5.1 =
+* Minimum value, with comma, wasn't working in variable product.
+
 = 1.2.5 =
 * Some improvements habe been mave in code.
 
@@ -91,6 +94,9 @@ Ainda não, em breve...
 * Plugin release.
 
 == Upgrade Notice ==
+
+= 1.2.5.1 =
+* Fixed some bugs.
 
 = 1.2.5 =
 * The plugin code was rewrited to work better.
