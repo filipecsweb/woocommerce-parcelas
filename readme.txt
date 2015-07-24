@@ -1,4 +1,5 @@
-=== Plugin Name ===
+=== WooCommerce Parcelas ===
+
 Contributors: filiprimo
 Donate link: http://filipecsweb.com.br/doacoes/
 Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel

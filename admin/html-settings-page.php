@@ -2,8 +2,9 @@
 /**
  * This file is responsible for plugin settings form
  *
- * @since 	1.2.5.1
- * @author 	Filipe Seabra <eu@filipecsweb.com.br>
+ * @since 		1.2.5.1
+ * @author 		Filipe Seabra <eu@filipecsweb.com.br>
+ * @version 	1.2.5.1
  */
 if(!defined('ABSPATH')){
 	exit;
