@@ -4,36 +4,52 @@
  *
  * @since 		1.2.5.1
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
- * @version 	1.2.5.1
+ * @version 	1.2.6
  */
 if(!defined('ABSPATH')){
 	exit;
 }
 ?>
 
-<div class="wrap">
-	<div class="section">
-		<form action="options.php" method="post">
-			<?php settings_fields($this->option_group); ?>
-			<?php // settings_fields( $option_group ); ?>
+<div class="wrap woocommerce-parcelas">
+	<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-			<?php do_settings_sections($this->page); ?>
-			<?php // do_settings_sections( $page ); ?>
+	<form action="options.php" method="post">
+		<?php settings_fields($this->option_group); ?>			
 
-			<?php submit_button(); ?>
-		</form>		
-	</div>
-	<div class="section">
-		<div class="fswp_rodape">
-			<p><?php echo __('Achou a ferramenta útil? Faça uma doação... assim você ajuda com a manutenção e criação de todos os projetos gratuitos.', 'woocommerce-parcelas'); ?></p>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="hosted_button_id" value="QM6NM5RMLQ9L4">
-				<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Doe para FilipeCS Web">
-				<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-			</form>
-			<hr />
-			<?php echo '<a class="button-secondary" href="//filipecsweb.com.br/?p=43" target="_blank">' . __('Bugs e Sugestões', 'woocommerce-parcelas') . '</a>'; ?>
+		<div class="tabs">
+			<h3 class="fs-active"><?php echo __('Geral', 'woocommerce-parcelas'); ?></h3>
+			<div class="section">
+				<h3><?php echo __('Opções para parcelamento', 'woocommerce-parcelas'); ?></h3>				
+				<table class="form-table">					
+					<?php do_settings_fields($this->page, 'fswp_installments_section'); ?>
+				</table>
+
+				<h3><?php echo __('Opções para pagamento à vista', 'woocommerce-parcelas'); ?></h3>
+				<table class="form-table">
+					<?php do_settings_fields($this->page, 'fswp_in_cash_section'); ?>
+				</table>
+			</div>
+			
+			<h3><?php echo __('Posição', 'woocommerce-parcelas'); ?></h3>
+			<div class="section">				
+				<p><?php echo __('Você pode mudar o local onde o <strong>preço parcelado</strong> aparece. Caso não queira alterar nada, basta deixar como está.', 'woocommerce-parcelas'); ?></p>
+				<p><?php echo __('Detalhe: caso a opção para pagamento à vista esteja habilitada, o preço à vista será inserido logo após o preço parcelado.') ?></p>				
+				<table class="form-table">					
+					<?php do_settings_fields($this->page, 'fswp_position_section'); ?>
+				</table>
+			</div>
 		</div>
+
+		<?php submit_button(); ?>
+	</form>
+	
+	<div class="section">
+		<p><?php echo __('Colabore com o desenvolvimento de plugins gratuitos fazendo uma doação:') ?></p>
+		<iframe style="width:100%; max-width:100%; height:30px;" src="//filipecsweb.com.br/plugin-footer.html" frameborder="0" scrolling="no"></iframe>
+
+		<?php echo '<a class="button-secondary" href="//filipecsweb.com.br/?p=43" target="_blank">' . __('Bugs e Sugestões', 'woocommerce-parcelas') . '</a>'; ?>
 	</div>
+	
+	<?php do_action('fswp_after_settings_page_submit_button'); ?>
 </div>

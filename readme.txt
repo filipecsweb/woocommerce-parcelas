@@ -4,52 +4,35 @@ Contributors: filiprimo
 Donate link: http://filipecsweb.com.br/doacoes/
 Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel
 Requires at least: 4.0
-Tested up to: 4.2
+Tested up to: 4.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This plugin adds <em>installments quantity</em> and the <em>price of each installment</em>, on WooCommerce loop pages and single product page.<br />It has an options page under "WooCommerce" > "Installments" where you can define <strong>installments quantity</strong>, <strong>prefix</strong>, <strong>suffix</strong> and a <strong>minimum value</strong> for each installment. Completely compatible with variable product.
-
-(Português)
-
-Este plugin para WooCommerce adiciona <em>quantidade de parcelas</em> e o <em>valor de cada parcela</em>, nas páginas que listam todos os produtos e na página individual de cada produto.<br />Possui uma página de opções em "WooCommerce" > "Parcelas" onde é possível definir a <strong>quantidade de parcelas</strong>, <strong>prefixo</strong>, <strong>sufixo</strong> e um <strong>valor mínimo</strong> para cada parcela. Totalmente compatível com produto variável.
+<p>Com este plugin é possível adicionar, preço parelado e/ou preço para pagamento à vista, nas páginas que listam todos os produtos e na página individual de cada produto.</p>
+<p>Possui uma página de opções em "WooCommerce" > "Parcelas" onde é possível definir a <strong>quantidade de parcelas</strong>, <strong>prefixo</strong>, <strong>sufixo</strong>, um <strong>valor mínimo</strong> para cada parcela, desconto para pagamento à vista, etc.</p>
+<p>As imagens falam por si mesmas: <a href="https://wordpress.org/plugins/woocommerce-parcelas/screenshots/">WooCommerce Parcelas Screenshots</a>.</p>
+<p>Compatível com produto variável.</p>
 
 == Installation ==
 
-1. Upload "woocommerce-parcelas.zip" through WordPress panel under "Plugins" > "Add New"
-2. Activate the plugin through the "Plugins" menu in WordPress
-3. Enable plugin functionality and set your installmentes options under "WooCommerce" > "Installments"
-
-(Português)
-
-1. Faça o upload do plugin através do painel do WordPress, indo em "Plugins" > "Adicionar Novo"
-2. Ative o plugin indo até o menu "Plugins"
-3. Habilite a funcionalidade do plugin e defina suas opções de parcelas, em "WooCommerce" > "Parcelas"
+1. Faça o upload do plugin através do painel do WordPress, indo em "Plugins" > "Adicionar Novo";
+2. Ative o plugin indo até o menu "Plugins";
+3. Habilite a funcionalidade do plugin e defina suas opções em "WooCommerce" > "Parcelas".
 
 == Frequently Asked Questions ==
 
-= Does it work with point, as decimal separator? =
-
-Yes.
-
-= Does it work with variable product? =
-
-Yes.
-
-= I want to add interest, is that possible? =
-
-Not yet, soon...
-
-(Português)
-
-= Funciona com o ponto, como separador decimal? =
+= Funciona com o ponto como separador decimal? =
 
 Sim.
 
-= Funciona com produto variável? =
+= Funciona com produto variável e agrupado? =
+
+Sim.
+
+= É possível definir um preço para pagamento à vista (boleto)? =
 
 Sim.
 
@@ -58,14 +41,19 @@ Sim.
 Ainda não, em breve...
 
 <hr />
-<p><a href="http://filipecsweb.com.br/?p=43" target="_blank">Contato / Contact</a></p>
+<p><a href="http://filipecsweb.com.br/?p=43" target="_blank">Contato</a></p>
 
 == Screenshots ==
 
-1. Tela de configuração
-2. Exemplo na listagem de produtos
+1. Tela de configuração (Geral)
+2. Tela de configuração (Posição)
+3. Páginas que listam os produtos
+4. Página indivudual do produto
 
 == Changelog ==
+
+= 1.2.6 =
+* Corrigido compatibilidade com produto agrupado. Adicionada opção para definir a posição do preço parcelado e à vista. Adicionada opção para definir um valor de desconto para pagamentos à vista.
 
 = 1.2.5.3 =
 * Settings link below plugin name was fixed.
@@ -98,6 +86,9 @@ Ainda não, em breve...
 * Plugin release.
 
 == Upgrade Notice ==
+
+= 1.2.6 =
+* WooCommerce Parcelas agora muito mais completo! Atualize para definir a posição do preço parcelado e definir um desconto para pagamentos à vista (boleto).
 
 = 1.2.5.1 =
 * Fixed some bugs.
