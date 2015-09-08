@@ -4,9 +4,9 @@
  *
  * @since 		1.0.0
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
- * @version 	1.2.6
+ * @version 	1.2.7
  */
-class Woocommerce_Parcelas_Settigns{
+class Woocommerce_Parcelas_Settings{
 	/**
 	 * Initialize option group
 	 *
@@ -347,4 +347,4 @@ class Woocommerce_Parcelas_Settigns{
 	}
 }
 
-new Woocommerce_Parcelas_Settigns();
+new Woocommerce_Parcelas_Settings();

@@ -1,8 +1,8 @@
 === WooCommerce Parcelas ===
 
-Contributors: filiprimo
+Contributors: filiprimo, webapex
 Donate link: http://filipecsweb.com.br/doacoes/
-Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel
+Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel, à vista, preço boleto, preço à vista, in cash
 Requires at least: 4.0
 Tested up to: 4.3
 Stable tag: trunk
@@ -11,10 +11,31 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-<p>Com este plugin é possível adicionar, preço parelado e/ou preço para pagamento à vista, nas páginas que listam todos os produtos e na página individual de cada produto.</p>
-<p>Possui uma página de opções em "WooCommerce" > "Parcelas" onde é possível definir a <strong>quantidade de parcelas</strong>, <strong>prefixo</strong>, <strong>sufixo</strong>, um <strong>valor mínimo</strong> para cada parcela, <strong>desconto para pagamento à vista</strong>, etc.</p>
+<p>Com este plugin é possível adicionar informações sobre preço parcelado e/ou preço para pagamento à vista, nas páginas que listam todos os produtos e na página individual de cada produto.</p>
+<p>Possui uma página de opções em "WooCommerce" > "Parcelas" onde é possível definir:</p>
+<ul>
+	<li>Opções para parcelamento:
+		<ul>
+			<li>Prefixo;</li>
+			<li>Quantidade de parcelas;</li>
+			<li>Sufixo;</li>
+			<li>Valor mínimo da parcela.</li>
+		</ul>
+	</li>
+	<li>Opções para pagamento à vista:
+		<ul>
+			<li>Prefixo;</li>
+			<li>Valor do desconto;</li>
+			<li>Tipo do desconto (% ou fixo);</li>
+			<li>Sufixo;</li>
+			<li>É possível desabilitar o preço à vista em qualquer produto, individualmente.</li>
+
+		</ul>
+	</li>
+	<li>Posicão dessas informações dentro das páginas.</li>	
+</ul>
 <p>As imagens falam por si mesmas: <a href="https://wordpress.org/plugins/woocommerce-parcelas/screenshots/">WooCommerce Parcelas Screenshots</a>.</p>
-<p>Compatível com produto variável.</p>
+<p><strong>Compatível, também, com produto variável e agrupado.</strong></p>
 
 == Installation ==
 
@@ -47,10 +68,14 @@ Ainda não, em breve...
 
 1. Tela de configuração (Geral)
 2. Tela de configuração (Posição)
-3. Páginas que listam os produtos
-4. Página indivudual do produto
+3. Páginas que listam os produtos (frontend)
+4. Página indivudual do produto (frontend)
+5. Página indivudual do produto (backend)
 
 == Changelog ==
+
+= 1.2.7 =
+* Adicionada opção para desabilitar o preço à vista em produtos específicos.
 
 = 1.2.6 =
 * Corrigido compatibilidade com produto agrupado. Adicionada opção para definir a posição do preço parcelado e à vista. Adicionada opção para definir um valor de desconto para pagamentos à vista.
@@ -86,6 +111,9 @@ Ainda não, em breve...
 * Plugin release.
 
 == Upgrade Notice ==
+
+= 1.2.7 =
+* Agora você pode desabilitar o preço à vista em produtos específicos.
 
 = 1.2.6 =
 * WooCommerce Parcelas agora muito mais completo! Atualize para definir a posição do preço parcelado e definir um desconto para pagamentos à vista (boleto).

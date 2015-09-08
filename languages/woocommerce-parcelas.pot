@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Parcelas\n"
-"POT-Creation-Date: 2015-08-24 00:44-0300\n"
+"POT-Creation-Date: 2015-09-06 17:03-0300\n"
 "PO-Revision-Date: 2015-08-24 00:44-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,11 +11,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.4\n"
-"X-Poedit-Basepath: ../Dropbox/WordPress/Plugins/woocommerce-parcelas/trunk\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-woocommerce-parcelas-meta-box.php:35
+msgid "Parcelamento e pagamento à vista"
+msgstr ""
+
+#: admin/class-woocommerce-parcelas-meta-box.php:57
+msgid "Desativar preço à vista para este produto"
+msgstr ""
 
 #: admin/class-woocommerce-parcelas-settings.php:61
 msgid "Woo Parcelas"
@@ -170,7 +179,7 @@ msgstr ""
 msgid "Bugs e Sugestões"
 msgstr ""
 
-#: public/class-woocommerce-parcelas-public.php:124
+#: public/class-woocommerce-parcelas-public.php:164
 msgid "x de"
 msgstr ""
 
@@ -192,7 +201,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: woocommerce-parcelas.php:158
+#: woocommerce-parcelas.php:160
 #, php-format
 msgid ""
 "Não é possível habilitar o plugin %s enquanto o %s não estiver instalado e "

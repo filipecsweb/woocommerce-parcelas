@@ -4,9 +4,9 @@
  *
  * @since    1.0.0
  * @author   Filipe Seabra
- * @version  1.2.6
+ * @version  1.2.7
  */
-class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
+class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
     /**
      * Is installments option enabled?
      *
@@ -64,6 +64,24 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
          */
         $product = get_product();
 
+        /**
+         * Get WooCommerce Parcelas product meta
+         */
+        if(null != get_post_meta($product->id, $this->fswp_post_meta_key)){
+            $fswp_post_meta_data = get_post_meta($product->id, $this->fswp_post_meta_key, true);
+
+            /**
+             * @var     $disable_in_cash_in_product  bool    
+             */
+            $disable_in_cash_in_product = (bool) $fswp_post_meta_data[$this->disable_in_cash_key];
+        }
+        else{
+            /**
+             * @var     $disable_in_cash_in_product  bool    
+             */
+            $disable_in_cash_in_product = false;
+        }
+
         if(!$product->get_price_including_tax()){
             return;
         }        
@@ -73,7 +91,9 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
         }        
 
         if($this->allow_in_cash){
-            include 'in-cash-calc.php';
+            if(!$disable_in_cash_in_product){
+                include 'in-cash-calc.php';
+            }            
         }
 
         do_action('after_installments_in_loop');
@@ -94,6 +114,24 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
          */
         $product = get_product();
 
+        /**
+         * Get WooCommerce Parcelas product meta
+         */
+        if(null != get_post_meta($product->id, $this->fswp_post_meta_key)){
+            $fswp_post_meta_data = get_post_meta($product->id, $this->fswp_post_meta_key, true);
+
+            /**
+             * @var     $disable_in_cash_in_product  bool    
+             */
+            $disable_in_cash_in_product = (bool) $fswp_post_meta_data[$this->disable_in_cash_key];
+        }
+        else{
+            /**
+             * @var     $disable_in_cash_in_product  bool    
+             */
+            $disable_in_cash_in_product = false;
+        }
+
         if(!$product->get_price_including_tax()){
             return;
         }
@@ -109,7 +147,9 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Settigns{
          * If in cash option is enabled in backend
          */
         if($this->allow_in_cash){
-            include 'in-cash-calc.php';                                       
+            if(!$disable_in_cash_in_product){
+                include 'in-cash-calc.php';
+            }                                            
         }
 
         do_action('after_installments_in_single');
