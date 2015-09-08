@@ -54,4 +54,4 @@ $in_cash_html  = "<div class='fswp_in_cash_price'>";
 	$in_cash_html .= "</p>";
 $in_cash_html .= "</div>";
 
-echo apply_filters('fswp_in_cash_calc_output', $in_cash_html, $prefix, $discount_price, $sufix);
+echo apply_filters('fswp_in_cash_calc_output', $in_cash_html, $prefix, $discount_price, $suffix);
