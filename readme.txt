@@ -5,7 +5,7 @@ Donate link: http://filipecsweb.com.br/doacoes/
 Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel, à vista, preço boleto, preço à vista, in cash
 Requires at least: 4.0
 Tested up to: 4.3
-Stable tag: trunk
+Stable tag: 1.2.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
