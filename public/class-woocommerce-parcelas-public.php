@@ -3,8 +3,8 @@
  * Build functions that will modify frontend
  *
  * @since    1.0.0
- * @author   Filipe Seabra
- * @version  1.2.7
+ * @author   Filipe Seabra <eu@filipecsweb.com.br>
+ * @version  1.2.8
  */
 class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
     /**
@@ -27,27 +27,39 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
          */
         $this->settings = get_option($this->option_name);
 
-        $this->allow_installments = $this->settings['enable_installments'];
+        $this->allow_installments = isset($this->settings['enable_installments']) ? $this->settings['enable_installments'] : 0;
 
-        $this->allow_in_cash = $this->settings['enable_in_cash'];
+        $this->allow_in_cash = isset($this->settings['enable_in_cash']) ? $this->settings['enable_in_cash'] : 0;
 
         if($this->allow_installments != 1 && $this->allow_in_cash != 1){
             return;
         }
-        else if($this->allow_installments || $this->allow_installments){
+        else if($this->allow_installments || $this->allow_in_cash){
+            /**
+             * Add plugin Stylesheet and JavaScript, in frontend
+             */
+            add_action('wp_enqueue_scripts', array($this, 'public_stylesheet_and_javascript'));
+
+            // The tag below is loaded by WooCommerce only in varable products that have children with different prices
+            // The priority is 98 because the function below will load necessary variables to do the calculation
+            // The action with priority 99 is located under the individual files that are doing the calculation
             add_action('woocommerce_before_single_variation', array($this, 'fswp_variable_product_js_variables'), 98);
-        }
 
-        /**
-         * Add installments to WooCommerce loop pages
-         */
-        add_action($this->settings['fswp_in_loop_position'], array($this, 'fswp_in_loop'), $this->settings['fswp_in_loop_position_level']);
+            /**
+             * Add installments to WooCommerce loop pages
+             */
+            add_action($this->settings['fswp_in_loop_position'], array($this, 'fswp_in_loop'), $this->settings['fswp_in_loop_position_level']);
 
-        /**
-         * Add installments to Woocommerce single product page
-         */
-        add_action($this->settings['fswp_in_single_position'], array($this, 'fswp_in_single'), $this->settings['fswp_in_single_position_level']);
-    }    
+            /**
+             * Add installments to Woocommerce single product page
+             */
+            add_action($this->settings['fswp_in_single_position'], array($this, 'fswp_in_single'), $this->settings['fswp_in_single_position_level']);
+        }        
+    }
+
+    public function public_stylesheet_and_javascript(){
+        wp_enqueue_style(WC_PARCELAS_SLUG.'-public', WC_PARCELAS_URL.'public/css/woocommerce-parcelas-public.php', array(), WC_PARCELAS_VERSION, 'all');
+    }
 
     /**
      * Displays the installments price on loop.
@@ -64,36 +76,20 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
          */
         $product = get_product();
 
-        /**
-         * Get WooCommerce Parcelas product meta
-         */
-        if(null != get_post_meta($product->id, $this->fswp_post_meta_key)){
-            $fswp_post_meta_data = get_post_meta($product->id, $this->fswp_post_meta_key, true);
-
-            /**
-             * @var     $disable_in_cash_in_product  bool    
-             */
-            $disable_in_cash_in_product = (bool) $fswp_post_meta_data[$this->disable_in_cash_key];
-        }
-        else{
-            /**
-             * @var     $disable_in_cash_in_product  bool    
-             */
-            $disable_in_cash_in_product = false;
-        }
-
         if(!$product->get_price_including_tax()){
             return;
         }        
 
         if($this->allow_installments){
-            include 'installments-calc.php';
+            if($this->get_fswp_post_meta_data($this->disable_installments_key) !== '1'){
+                include 'installments-calc.php';
+            }
         }        
 
         if($this->allow_in_cash){
-            if(!$disable_in_cash_in_product){
+            if($this->get_fswp_post_meta_data($this->disable_in_cash_key) !== '1'){
                 include 'in-cash-calc.php';
-            }            
+            }           
         }
 
         do_action('after_installments_in_loop');
@@ -115,39 +111,19 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
         $product = get_product();
 
         /**
-         * Get WooCommerce Parcelas product meta
-         */
-        if(null != get_post_meta($product->id, $this->fswp_post_meta_key)){
-            $fswp_post_meta_data = get_post_meta($product->id, $this->fswp_post_meta_key, true);
-
-            /**
-             * @var     $disable_in_cash_in_product  bool    
-             */
-            $disable_in_cash_in_product = (bool) $fswp_post_meta_data[$this->disable_in_cash_key];
-        }
-        else{
-            /**
-             * @var     $disable_in_cash_in_product  bool    
-             */
-            $disable_in_cash_in_product = false;
-        }
-
-        if(!$product->get_price_including_tax()){
-            return;
-        }
-
-        /**
          * If installment option is enabled in backend
          */
         if($this->allow_installments){
-            include 'installments-calc.php'; 
+            if($this->get_fswp_post_meta_data($this->disable_installments_key) !== '1'){
+                include 'installments-calc.php';
+            }
         }        
 
         /**
          * If in cash option is enabled in backend
          */
         if($this->allow_in_cash){
-            if(!$disable_in_cash_in_product){
+            if($this->get_fswp_post_meta_data($this->disable_in_cash_key) !== '1'){
                 include 'in-cash-calc.php';
             }                                            
         }
@@ -156,7 +132,9 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
     }
 
     /**
+     * Insert necessaryJavaScript variables before doing calculation
      *
+     * @return void
      */
     public function fswp_variable_product_js_variables(){
 ?>
@@ -164,17 +142,30 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
             var x_de = <?php echo "'".__('x de', 'woocommerce-parcelas')."'"; ?>;
             var dec_sep = <?php echo "'".get_option('woocommerce_price_decimal_sep')."'"; ?>;
             var th_sep = <?php echo "'".get_option('woocommerce_price_thousand_sep')."'"; ?>;
-            var cur_symbol = <?php echo "'".get_woocommerce_currency_symbol()."'"; ?>
+            var cur_symbol = <?php echo "'".get_woocommerce_currency_symbol()."'"; ?>;
+            var cur_pos = <?php echo "'".get_option('woocommerce_currency_pos')."'"; ?>;
             
-            function formatMoney(number, c, d, m){
+            function formatMoney(cur_symbol, number, c, d, m, cur_pos){
                 c = isNaN(c = Math.abs(c)) ? 2 : c, 
                 d = d == undefined ? "." : d, 
                 m = m == undefined ? "," : m, 
                 s = number < 0 ? "-" : "", 
                 i = parseInt(number = Math.abs(+number || 0).toFixed(c)) + "", 
-                j = (j = i.length) > 3 ? j % 3 : 0;
+                j = (j = i.length) > 3 ? j % 3 : 0,
+                cur_pos = cur_pos == "" ? "left" : cur_pos;
 
-                return s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "");
+                if(cur_pos == 'left'){
+                    return cur_symbol + s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "");
+                }
+                else if(cur_pos == 'left_space'){
+                    return cur_symbol + '&nbsp;' + s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "");
+                }
+                else if(cur_pos == 'right'){
+                    return s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "") + cur_symbol;
+                }
+                else if(cur_pos == 'right_space'){
+                    return s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "") + '&nbsp;' + cur_symbol;
+                }                
             };
         </script>
 <?php        
@@ -201,7 +192,9 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
     }
 
     /**
-     * 
+     * Calculate and display in cash price when child products have different prices
+     *
+     * @return  void
      */
     public function fswp_variable_in_cash_calculation(){
 ?>

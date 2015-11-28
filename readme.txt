@@ -28,11 +28,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 			<li>Valor do desconto;</li>
 			<li>Tipo do desconto (% ou fixo);</li>
 			<li>Sufixo;</li>
-			<li>É possível desabilitar o preço à vista em qualquer produto, individualmente.</li>
+			<li>É possível desabilitar o preço à vista e/ou o preço parcelado em qualquer produto, individualmente.</li>
 
 		</ul>
 	</li>
-	<li>Posicão dessas informações dentro das páginas.</li>	
+	<li>Posicão e alinhamento dessas informações dentro das páginas;</li>
+	<li>Estilizar as informações de parcelamento e de pagamento à vista, separadamente e por página.</li>
 </ul>
 <p>As imagens falam por si mesmas: <a href="https://wordpress.org/plugins/woocommerce-parcelas/screenshots/">WooCommerce Parcelas Screenshots</a>.</p>
 <p><strong>Compatível, também, com produto variável e agrupado.</strong></p>
@@ -59,10 +60,10 @@ Sim.
 
 = Quero adicionar juros, é possível? =
 
-Ainda não, em breve...
+Ainda não, talvez, em breve...
 
 <hr />
-<p><a href="http://filipecsweb.com.br/?p=43" target="_blank">Contato</a></p>
+<p><a href="http://filipecsweb.com.br/contato" target="_blank">Bugs e Sugestões</a></p>
 
 == Screenshots ==
 
@@ -73,6 +74,13 @@ Ainda não, em breve...
 5. Página indivudual do produto (backend)
 
 == Changelog ==
+
+= 1.2.8 =
+* Corrigido bug que impedia o preço à vista de ser mostrado, em produtos variáveis com preços diferentes, caso o parcelamento estivesse desativado.
+* Adicionada opção para desabilitar o preço parcelado em produtos específicos.
+* Adicionada opção para mudar a posição de alinhamento (centralizar) das informações.
+* Adicionada sessão com opções que possibilitam a estilização/formatação das informações.
+* Corrigida URL do botão 'Bugs e Sugestões'
 
 = 1.2.7 =
 * Adicionada opção para desabilitar o preço à vista em produtos específicos.
@@ -111,6 +119,9 @@ Ainda não, em breve...
 * Plugin release.
 
 == Upgrade Notice ==
+
+= 1.2.8 =
+* Esta versão vem com uma série de correções, otimizações de código e novas opções, atualize sem medo!
 
 = 1.2.7 =
 * Agora você pode desabilitar o preço à vista em produtos específicos.

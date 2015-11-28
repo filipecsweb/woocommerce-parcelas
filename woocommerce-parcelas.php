@@ -5,7 +5,7 @@
  * Description: Adiciona quantidade de parcelas e o valor de cada parcela, nas páginas que listam todos os produtos e na página individual de cada produto.
  * Author: Filipe Seabra
  * Author URI: //filipecsweb.com.br/
- * Version: 1.2.7
+ * Version: 1.2.8
  * License: GPLv2 or later
  * License URI: //www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: woocommerce-parcelas
@@ -18,7 +18,7 @@ if(!defined('ABSPATH')){
 
 define('WC_PARCELAS_PATH',	plugin_dir_path(__FILE__));
 define('WC_PARCELAS_URL',	plugin_dir_url(__FILE__));
-define('WC_PARCELAS_VERSION', '1.2.7');
+define('WC_PARCELAS_VERSION', '1.2.8');
 define('WC_PARCELAS_NAME', 'WooCommerce Parcelas');
 define('WC_PARCELAS_SLUG', 'woocommerce-parcelas');
 
@@ -117,7 +117,7 @@ class WC_Parcelas{
 	public function plguin_action_links($links){
 		$settings_url = admin_url('admin.php?page=fswp');
 
-		$links[] = '<a href="'.esc_url($settings_url).'">'.__('Settings', 'woocommerce').'</a>';
+		$links[] = '<a href="'.esc_url($settings_url).'">'.__('Configurações', 'woocommerce-parcelas').'</a>';
 
 		return $links;
 	}
@@ -133,12 +133,13 @@ class WC_Parcelas{
 		/**
 		 * Call plugin Stylesheet
 		 */
-		wp_enqueue_style(WC_PARCELAS_SLUG.'-admin-css', WC_PARCELAS_URL.'admin/css/woocommerce-parcelas-admin.css', array(), WC_PARCELAS_VERSION, 'all');		
+		wp_enqueue_style(WC_PARCELAS_SLUG.'-admin', WC_PARCELAS_URL.'admin/css/woocommerce-parcelas-admin.css', array(), WC_PARCELAS_VERSION, 'all');		
+		wp_enqueue_style('wp-color-picker');
 
 		/**
 		 * Call plugin JavaScript
 		 */
-		wp_enqueue_script(WC_PARCELAS_SLUG.'-admin-js', WC_PARCELAS_URL.'admin/js/woocommerce-parcelas-admin.js', array('jquery'), WC_PARCELAS_VERSION, false);	
+		wp_enqueue_script(WC_PARCELAS_SLUG.'-admin', WC_PARCELAS_URL.'admin/js/woocommerce-parcelas-admin.js', array('jquery', 'wp-color-picker'), WC_PARCELAS_VERSION, false);	
 	}
 
 	/**
@@ -157,7 +158,7 @@ class WC_Parcelas{
 	 */
 	public function wc_missing_notice(){
 		$class = 'error';
-		$message = sprintf(__('Não é possível habilitar o plugin %s enquanto o %s não estiver instalado e ativado.'), '<strong>'.WC_PARCELAS_NAME.'</strong>', '<a href="//wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a>');
+		$message = sprintf(__('Não é possível habilitar o plugin %s enquanto o %s não estiver instalado e ativado.', 'woocommerce-parcelas'), '<strong>'.WC_PARCELAS_NAME.'</strong>', '<a href="//wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a>');
 
 		echo "<div class='$class'>";
 		echo 	"<p>$message</p>";

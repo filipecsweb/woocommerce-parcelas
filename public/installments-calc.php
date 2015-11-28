@@ -4,7 +4,7 @@
  *
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
  * @since 		1.2.6
- * @version 	1.2.6
+ * @version 	1.2.8
  */
 if(!defined('ABSPATH')){
 	exit;
@@ -57,13 +57,13 @@ if($price <= $min_value){
 }
 elseif($price > $min_value){
     $installments_price = $price / $installments;
-    $formatted_installments_price = woocommerce_price($price / $installments);
+    $formatted_installments_price = wc_price($price / $installments);
 
     if($installments_price < $min_value){
         while($installments > 1 && $installments_price < $min_value){
             $installments--;
             $installments_price = $price / $installments;
-            $formatted_installments_price = woocommerce_price($price / $installments);
+            $formatted_installments_price = wc_price($price / $installments);
         }
 
         if($installments_price > $min_value){

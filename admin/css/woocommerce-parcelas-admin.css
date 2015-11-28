@@ -10,12 +10,12 @@
 }
 .woocommerce-parcelas form .tabs > h3{
 	float: left;
-	margin: 0 10px 0 0;
+	margin: 0;
 	cursor: pointer;
 	opacity: 0.7;
 	padding: 5px 10px;
-	background-color: #dddddd;
-	border-bottom: 2px solid #dddddd;
+	background-color: #DDDDDD;
+	border-bottom: 2px solid #DDDDDD;
 	position: absolute;
 	top: 0;
 }
@@ -24,6 +24,9 @@
 }
 .tabs h3 + .section + h3{
 	left: 70px;
+}
+.tabs h3 + .section + h3 + .section + h3{
+	left: 158px;
 }
 .woocommerce-parcelas form .tabs > h3.fs-active{
 	opacity: 1;
@@ -35,4 +38,20 @@
 }
 .woocommerce-parcelas form .tabs > h3.fs-active + .section{
 	display: block;	
+}
+.woocommerce-parcelas .style label{
+	margin-left: 15px;
+}
+.woocommerce-parcelas .style .in_loop,
+.woocommerce-parcelas .style .in_single{
+	padding: 0 10px;
+}
+.woocommerce-parcelas .style .wrapper{
+	margin-bottom: 30px;
+}
+.woocommerce-parcelas .style *{
+	vertical-align: middle;
+}
+.woocommerce-parcelas .wp-color-result{
+	margin: 0;
 }

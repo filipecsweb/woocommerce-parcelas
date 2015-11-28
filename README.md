@@ -15,11 +15,12 @@
 			<li>Valor do desconto;</li>
 			<li>Tipo do desconto (% ou fixo);</li>
 			<li>Sufixo;</li>
-			<li>É possível desabilitar o preço à vista em qualquer produto, individualmente.</li>
+			<li>É possível desabilitar o preço à vista e/ou o preço parcelado em qualquer produto, individualmente.</li>
 
 		</ul>
 	</li>
-	<li>Posicão dessas informações dentro das páginas.</li>	
+	<li>Posicão e alinhamento dessas informações dentro das páginas;</li>
+	<li>Estilizar as informações de parcelamento e de pagamento à vista, separadamente e por página.</li>
 </ul>
 <p>As imagens falam por si mesmas: <a href="https://wordpress.org/plugins/woocommerce-parcelas/screenshots/">WooCommerce Parcelas Screenshots</a>.</p>
 <p><strong>Compatível, também, com produto variável e agrupado.</strong></p>

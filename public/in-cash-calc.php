@@ -4,7 +4,7 @@
  *
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
  * @since 		1.2.6
- * @version 	1.2.6
+ * @version 	1.2.8
  */
 if(!defined('ABSPATH')){
 	exit;
@@ -50,7 +50,7 @@ else if($discount_type == 1){ // Fixed
 
 $in_cash_html  = "<div class='fswp_in_cash_price'>";
 	$in_cash_html .= "<p class='price fswp_calc'>";
-		$in_cash_html .= "<span class='fswp_in_cash_prefix'>" . $prefix . "</span> " . woocommerce_price($discount_price) . " <span class='fswp_in_cash_suffix'>" . $suffix . "</span>";
+		$in_cash_html .= "<span class='fswp_in_cash_prefix'>" . $prefix . "</span> " . wc_price($discount_price) . " <span class='fswp_in_cash_suffix'>" . $suffix . "</span>";
 	$in_cash_html .= "</p>";
 $in_cash_html .= "</div>";
 

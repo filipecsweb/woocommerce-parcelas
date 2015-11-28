@@ -4,18 +4,23 @@
  *
  * @since       1.2.7
  * @author      Filipe Seabra <eu@filipecsweb.com.br>
- * @version     1.2.7
+ * @version     1.2.8
  */
 class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings{
     /**
-     * @var     $fswp_post_meta_key     array
+     * @var     array   $fswp_post_meta_key
      */
     public $fswp_post_meta_key = 'fswp_post_meta';
 
     /**
-     * @var     $disable_in_cash_key     string
+     * @var     string  $disable_in_cash_key
      */
-    public $disable_in_cash_key = 'disable_in_cash';    
+    public $disable_in_cash_key = 'disable_in_cash';
+
+    /**
+     * @var     string  $disable_installments_key
+     */
+    public $disable_installments_key = 'disable_installments';
 
     public function __construct(){
         /**
@@ -36,25 +41,30 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings{
             array($this, 'fswp_product_meta_box_callback'), 
             'product', 
             'normal', 
-            'low'
+            'low',
+            array(
+                'values'    =>  array(
+                                    $this->disable_in_cash_key          => __('Desativar preço à vista para este produto', 'woocommerce-parcelas'),
+                                    $this->disable_installments_key     => __('Desativar preço parcelado para este produto', 'woocommerce-parcelas')
+                            )
+            )
         );
     }    
 
-    public function fswp_product_meta_box_callback($post){
+    public function fswp_product_meta_box_callback($post, $metabox){
         wp_nonce_field('fswp_product_meta_box_nonce_context', 'fswp_product_meta_box_nonce_name');
         
         if(null != get_post_meta($post->ID, $this->fswp_post_meta_key)){
             $fswp_post_meta_data = get_post_meta($post->ID, $this->fswp_post_meta_key, true);
-
-            /**
-             * @var     $disable_in_cash_value   string
-             */
-            $disable_in_cash_value = $fswp_post_meta_data[$this->disable_in_cash_key];
         }
 
-        echo "<input type='hidden' name='$this->fswp_post_meta_key[$this->disable_in_cash_key]' value='0' />";
-        echo "<input type='checkbox' id='$this->fswp_post_meta_key[$this->disable_in_cash_key]' name='$this->fswp_post_meta_key[$this->disable_in_cash_key]' value='1' " . checked(1, $disable_in_cash_value, false) . " />";
-        echo "<label for='$this->fswp_post_meta_key[$this->disable_in_cash_key]'>" . __('Desativar preço à vista para este produto', 'woocommerce-parcelas') . "</label>";
+        foreach($metabox['args']['values'] as $value => $label){
+            echo "<p>";            
+            echo "<input type='hidden' name='$this->fswp_post_meta_key[$value]' value='0' />";
+            echo "<input type='checkbox' id='$this->fswp_post_meta_key[$value]' name='$this->fswp_post_meta_key[$value]' value='1' " . checked(1, $fswp_post_meta_data[$value], false) . " />";
+            echo "<label for='$this->fswp_post_meta_key[$value]'>" . $label . "</label>";
+            echo "</p>";
+        }        
     }
 
     public function save_fswp_product_meta_box($post_id){
@@ -78,6 +88,24 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings{
                 add_post_meta($post_id, $this->fswp_post_meta_key, $_POST[$this->fswp_post_meta_key], true);
             }            
         }
+    }
+
+    /**
+     * Get fswp post meta value
+     *
+     * @param   string  $value                          meta_value name
+     * @return  string  $fswp_post_meta_data[$value]    meta_value value
+     */
+    public function get_fswp_post_meta_data($value){
+        $post_id = get_the_ID();
+        
+        if(null != get_post_meta($post_id, $this->fswp_post_meta_key)){
+            $fswp_post_meta_data = get_post_meta($post_id, $this->fswp_post_meta_key, true);
+
+            return $fswp_post_meta_data[$value];
+        }
+
+        return false;
     }
 }
 
