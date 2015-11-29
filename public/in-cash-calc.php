@@ -4,7 +4,7 @@
  *
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
  * @since 		1.2.6
- * @version 	1.2.8
+ * @version 	1.2.8.2
  */
 if(!defined('ABSPATH')){
 	exit;
@@ -48,7 +48,7 @@ else if($discount_type == 1){ // Fixed
 	$discount_price = $price - $discount_value;
 }
 
-$in_cash_html  = "<div class='fswp_in_cash_price'>";
+$in_cash_html  = "<div class='fswp_in_cash_price $class'>";
 	$in_cash_html .= "<p class='price fswp_calc'>";
 		$in_cash_html .= "<span class='fswp_in_cash_prefix'>" . $prefix . "</span> " . wc_price($discount_price) . " <span class='fswp_in_cash_suffix'>" . $suffix . "</span>";
 	$in_cash_html .= "</p>";

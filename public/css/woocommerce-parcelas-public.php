@@ -4,7 +4,7 @@
  *
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
  * @since 		1.2.8
- * @version 	1.2.8 	
+ * @version 	1.2.8.2
  */
 
 $absolute_path = explode('wp-content', $_SERVER['SCRIPT_FILENAME']);
@@ -27,24 +27,24 @@ $options = get_option($settings->option_name);
 
 $selectors_for_style = array(
 	// Installments in loop
-	'.products .fswp_installments_price .price.fswp_calc .fswp_installment_prefix',
-	'.products .fswp_installments_price .price.fswp_calc .amount',
-	'.products .fswp_installments_price .price.fswp_calc .fswp_installment_suffix',
+	'.loop.fswp_installments_price .price.fswp_calc .fswp_installment_prefix',
+	'.loop.fswp_installments_price .price.fswp_calc .amount',
+	'.loop.fswp_installments_price .price.fswp_calc .fswp_installment_suffix',
 
 	// Installments in single
-	'.summary .fswp_installments_price .price.fswp_calc .fswp_installment_prefix',
-	'.summary .fswp_installments_price .price.fswp_calc .amount',
-	'.summary .fswp_installments_price .price.fswp_calc .fswp_installment_suffix',
+	'.single.fswp_installments_price .price.fswp_calc .fswp_installment_prefix',
+	'.single.fswp_installments_price .price.fswp_calc .amount',
+	'.single.fswp_installments_price .price.fswp_calc .fswp_installment_suffix',
 
 	// In cash in loop
-	'.products .fswp_in_cash_price .price.fswp_calc .fswp_in_cash_prefix',
-	'.products .fswp_in_cash_price .price.fswp_calc .amount',
-	'.products .fswp_in_cash_price .price.fswp_calc .fswp_in_cash_suffix',
+	'.loop.fswp_in_cash_price .price.fswp_calc .fswp_in_cash_prefix',
+	'.loop.fswp_in_cash_price .price.fswp_calc .amount',
+	'.loop.fswp_in_cash_price .price.fswp_calc .fswp_in_cash_suffix',
 
 	// In cash in single
-	'.summary .fswp_in_cash_price .price.fswp_calc .fswp_in_cash_prefix',
-	'.summary .fswp_in_cash_price .price.fswp_calc .amount',
-	'.summary .fswp_in_cash_price .price.fswp_calc .fswp_in_cash_suffix'
+	'.single.fswp_in_cash_price .price.fswp_calc .fswp_in_cash_prefix',
+	'.single.fswp_in_cash_price .price.fswp_calc .amount',
+	'.single.fswp_in_cash_price .price.fswp_calc .fswp_in_cash_suffix'
 );
 
 $style_sections = $settings->get_fswp_style_sections();
@@ -70,10 +70,10 @@ foreach($selectors_for_style as $k => $selector){
 
 $selectors_for_position = array(
 	// Alignment in loop
-	'.products .fswp_installments_price .price.fswp_calc,.products .fswp_in_cash_price .price.fswp_calc',
+	'.loop.fswp_installments_price .price.fswp_calc,.loop.fswp_in_cash_price .price.fswp_calc',
 
 	// Alignment in single
-	'.summary .fswp_installments_price .price.fswp_calc,.summary .fswp_in_cash_price .price.fswp_calc'
+	'.single.fswp_installments_price .price.fswp_calc,.single.fswp_in_cash_price .price.fswp_calc'
 );
 
 $alignments = array(

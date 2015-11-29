@@ -34,6 +34,24 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings{
         add_action('save_post', array($this, 'save_fswp_product_meta_box'));        
     }
 
+    /**
+     * Get fswp post meta value
+     *
+     * @param   string  $value                          meta_value name
+     * @return  string  $fswp_post_meta_data[$value]    meta_value value
+     */
+    public function get_fswp_post_meta_data($value){
+        $post_id = get_the_ID();
+        
+        if(null != get_post_meta($post_id, $this->fswp_post_meta_key)){
+            $fswp_post_meta_data = get_post_meta($post_id, $this->fswp_post_meta_key, true);
+
+            return $fswp_post_meta_data[$value];
+        }
+
+        return false;
+    }
+
     public function add_fswp_product_meta_box(){
         add_meta_box(
             'fswp_product_meta_box', 
@@ -54,17 +72,13 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings{
     public function fswp_product_meta_box_callback($post, $metabox){
         wp_nonce_field('fswp_product_meta_box_nonce_context', 'fswp_product_meta_box_nonce_name');
         
-        if(null != get_post_meta($post->ID, $this->fswp_post_meta_key)){
-            $fswp_post_meta_data = get_post_meta($post->ID, $this->fswp_post_meta_key, true);
-        }
-
         foreach($metabox['args']['values'] as $value => $label){
             echo "<p>";            
             echo "<input type='hidden' name='$this->fswp_post_meta_key[$value]' value='0' />";
-            echo "<input type='checkbox' id='$this->fswp_post_meta_key[$value]' name='$this->fswp_post_meta_key[$value]' value='1' " . checked(1, $fswp_post_meta_data[$value], false) . " />";
+            echo "<input type='checkbox' id='$this->fswp_post_meta_key[$value]' name='$this->fswp_post_meta_key[$value]' value='1' " . checked(1, $this->get_fswp_post_meta_data($value), false) . " />";
             echo "<label for='$this->fswp_post_meta_key[$value]'>" . $label . "</label>";
             echo "</p>";
-        }        
+        }
     }
 
     public function save_fswp_product_meta_box($post_id){
@@ -88,25 +102,7 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings{
                 add_post_meta($post_id, $this->fswp_post_meta_key, $_POST[$this->fswp_post_meta_key], true);
             }            
         }
-    }
-
-    /**
-     * Get fswp post meta value
-     *
-     * @param   string  $value                          meta_value name
-     * @return  string  $fswp_post_meta_data[$value]    meta_value value
-     */
-    public function get_fswp_post_meta_data($value){
-        $post_id = get_the_ID();
-        
-        if(null != get_post_meta($post_id, $this->fswp_post_meta_key)){
-            $fswp_post_meta_data = get_post_meta($post_id, $this->fswp_post_meta_key, true);
-
-            return $fswp_post_meta_data[$value];
-        }
-
-        return false;
-    }
+    }    
 }
 
 new Woocommerce_Parcelas_Meta_Box();

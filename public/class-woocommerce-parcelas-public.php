@@ -4,7 +4,7 @@
  *
  * @since    1.0.0
  * @author   Filipe Seabra <eu@filipecsweb.com.br>
- * @version  1.2.8
+ * @version  1.2.8.2
  */
 class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
     /**
@@ -76,6 +76,13 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
          */
         $product = get_product();
 
+        /**
+         * Initialize class that will identify whether the product is in single or in loop
+         *
+         * @var     string  $class
+         */
+        $class = 'loop';
+
         if(!$product->get_price_including_tax()){
             return;
         }        
@@ -109,6 +116,13 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box{
          * @var     object  $product
          */
         $product = get_product();
+
+        /**
+         * Initialize class that will identify whether the product is in single or in loop
+         *
+         * @var     string  $class
+         */
+        $class = 'single';
 
         /**
          * If installment option is enabled in backend

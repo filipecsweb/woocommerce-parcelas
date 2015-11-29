@@ -4,7 +4,7 @@
  *
  * @author 		Filipe Seabra <eu@filipecsweb.com.br>
  * @since 		1.2.6
- * @version 	1.2.8
+ * @version 	1.2.8.2
  */
 if(!defined('ABSPATH')){
 	exit;
@@ -60,14 +60,14 @@ elseif($price > $min_value){
     $formatted_installments_price = wc_price($price / $installments);
 
     if($installments_price < $min_value){
-        while($installments > 1 && $installments_price < $min_value){
+        while($installments > 2 && $installments_price < $min_value){
             $installments--;
             $installments_price = $price / $installments;
             $formatted_installments_price = wc_price($price / $installments);
         }
 
-        if($installments_price > $min_value){
-            $installments_html  = "<div class='fswp_installments_price'>";
+        if($installments_price >= $min_value){
+            $installments_html  = "<div class='fswp_installments_price $class'>";
             	$installments_html .= "<p class='price fswp_calc'>".sprintf(__('<span class="fswp_installment_prefix">%s %sx de</span> ', 'woocommerce-parcelas'), $prefix, $installments).$formatted_installments_price." <span class='fswp_installment_suffix'>".$suffix."</span></p>";
             $installments_html .= "</div>";                    
         }
@@ -76,7 +76,7 @@ elseif($price > $min_value){
         }
     }
     else{
-        $installments_html  = "<div class='fswp_installments_price'>";
+        $installments_html  = "<div class='fswp_installments_price $class'>";
         	$installments_html .= "<p class='price fswp_calc'>".sprintf(__('<span class="fswp_installment_prefix">%s %sx de </span>', 'woocommerce-parcelas'), $prefix, $installments).$formatted_installments_price." <span class='fswp_installment_suffix'>".$suffix."</span></p>";
         $installments_html .= "</div>";
     }      
