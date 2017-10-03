@@ -2,126 +2,130 @@
 /**
  * This file is responsible for plugin settings form
  *
- * @since 		1.2.5.1
- * @author 		Filipe Seabra <eu@filipecsweb.com.br>
- * @version 	1.2.8
+ * @since         1.2.5.1
+ * @author        Filipe Seabra <filipecseabra@gmail.com>
+ * @version       1.2.9.1
  */
-if(!defined('ABSPATH')){
-	exit;
+if (! defined('ABSPATH'))
+{
+    exit;
 }
 ?>
 
-<div class="wrap woocommerce-parcelas">
-	<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+<div class="wrap wc-parcelas">
+    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-	<form action="options.php" method="post">
-		<?php settings_fields($this->option_group); ?>			
+    <h2 class="nav-tab-wrapper">
+        <a href="#general-tab" class="nav-tab nav-tab-active"><?php echo __('Geral', 'wc-parcelas'); ?></a>
+        <a href="#position-tab" class="nav-tab"><?php echo __('Posição', 'wc-parcelas'); ?></a>
+        <a href="#style-tab" class="nav-tab"><?php echo __('Estilo', 'wc-parcelas'); ?></a>
+        <a href="#troubleshooting-tab" class="nav-tab"><?php echo __('Solucionar problemas', 'wc-parcelas'); ?></a>
+    </h2>
 
-		<div class="tabs">
-			<h3 class="fs-active"><?php echo __('Geral', 'woocommerce-parcelas'); ?></h3>
-			<div class="section">
-				<h3><?php echo __('Opções para parcelamento', 'woocommerce-parcelas'); ?></h3>				
-				<table class="form-table">					
-					<?php do_settings_fields($this->page, 'section_general-installments'); ?>
-				</table>
+    <form action="options.php" method="post">
+        <?php settings_fields($this->option_group); ?>
 
-				<h3><?php echo __('Opções para pagamento à vista', 'woocommerce-parcelas'); ?></h3>
-				<table class="form-table">
-					<?php do_settings_fields($this->page, 'section_general-in_cash'); ?>
-				</table>
-			</div>
-			
-			<h3><?php echo __('Posição', 'woocommerce-parcelas'); ?></h3>
-			<div class="section">				
-				<p><?php echo __('Abaixo você pode definir a posição de alinhamento, das informações de parcela e pagamento à vista.', 'woocommerce-parcelas'); ?></p>
-				<table class="form-table">
-					<?php do_settings_fields($this->page, 'section_position-alignment'); ?>
-				</table>
+        <div id="general-tab" class="section active">
+            <h3><?php echo __('Opções para parcelamento', 'wc-parcelas'); ?></h3>
+            <table class="form-table">
+                <?php do_settings_fields($this->page, 'section_general-installments'); ?>
+            </table>
 
-				<hr />
+            <h3><?php echo __('Opções para pagamento à vista', 'wc-parcelas'); ?></h3>
+            <table class="form-table">
+                <?php do_settings_fields($this->page, 'section_general-in_cash'); ?>
+            </table>
+        </div>
 
-				<p><?php echo __('Abaixo você pode mudar o local onde o <strong>preço parcelado</strong> aparece.', 'woocommerce-parcelas'); ?></p>
-				<p><?php echo __('Detalhe: caso a opção para pagamento à vista esteja habilitada, o preço à vista será inserido logo após o preço parcelado.', 'woocommerce-parcelas'); ?></p>
-				<table class="form-table">					
-					<?php do_settings_fields($this->page, 'section_position-position'); ?>
-				</table>				
-			</div>
+        <div id="position-tab" class="section">
+            <p><?php echo __('Abaixo você pode definir a posição de alinhamento, das informações de parcela e pagamento à vista.', 'wc-parcelas'); ?></p>
+            <table class="form-table">
+                <?php do_settings_fields($this->page, 'section_position-alignment'); ?>
+            </table>
 
-			<h3><?php echo __('Estilo', 'woocommerce-parcelas'); ?></h3>
-			<div class="section style">							
-				<div class="installments">
-					<h3><?php echo __('Estilo para parcelamento', 'woocommerce-parcelas'); ?></h3>
+            <hr/>
 
-					<div class="in_loop">
-						<h4><u><?php echo __('Página que lista os produtos', 'woocommerce-parcelas'); ?></u></h4>
+            <p><?php echo __('Abaixo você pode mudar o local onde o <strong>preço parcelado</strong> aparece.', 'wc-parcelas'); ?></p>
+            <p><?php echo __('Detalhe: caso a opção para pagamento à vista esteja habilitada, o preço à vista será inserido logo após o preço parcelado.', 'wc-parcelas'); ?></p>
+            <table class="form-table">
+                <?php do_settings_fields($this->page, 'section_position-position'); ?>
+            </table>
+        </div>
 
-						<div class="wrapper">
-							<h5><?php echo __('Prefixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(0)); ?>
-							<h5><?php echo __('Preço', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(1)); ?>
-							<h5><?php echo __('Sufixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(2)); ?>
-						</div>
-					</div>
+        <div id="style-tab" class="section style">
+            <div class="installments">
+                <h3><?php echo __('Estilo para parcelamento', 'wc-parcelas'); ?></h3>
 
-					<div class="in_single">
-						<h4><u><?php echo __('Página individual do produto', 'woocommerce-parcelas'); ?></u></h4>
+                <div class="in_loop">
+                    <h4><u><?php echo __('Página que lista os produtos', 'wc-parcelas'); ?></u></h4>
 
-						<div class="wrapper">
-							<h5><?php echo __('Prefixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(3)); ?>
-							<h5><?php echo __('Preço', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(4)); ?>
-							<h5><?php echo __('Sufixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(5)); ?>
-						</div>
-					</div>
-				</div>
+                    <div class="wrapper">
+                        <h5><?php echo __('Prefixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(0)); ?>
+                        <h5><?php echo __('Preço', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(1)); ?>
+                        <h5><?php echo __('Sufixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(2)); ?>
+                    </div>
+                </div>
 
-				<hr />
+                <div class="in_single">
+                    <h4><u><?php echo __('Página individual do produto', 'wc-parcelas'); ?></u></h4>
 
-				<div class="in_cash">
-					<h3><?php echo __('Estilo para pagamento à vista', 'woocommerce-parcelas'); ?></h3>
+                    <div class="wrapper">
+                        <h5><?php echo __('Prefixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(3)); ?>
+                        <h5><?php echo __('Preço', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(4)); ?>
+                        <h5><?php echo __('Sufixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(5)); ?>
+                    </div>
+                </div>
+            </div>
 
-					<div class="in_loop">
-						<h4><u><?php echo __('Página que lista os produtos', 'woocommerce-parcelas'); ?></u></h4>
+            <hr/>
 
-						<div class="wrapper">
-							<h5><?php echo __('Prefixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(6)); ?>
-							<h5><?php echo __('Preço', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(7)); ?>
-							<h5><?php echo __('Sufixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(8)); ?>
-						</div>
-					</div>
+            <div class="in_cash">
+                <h3><?php echo __('Estilo para pagamento à vista', 'wc-parcelas'); ?></h3>
 
-					<div class="in_single">
-						<h4><u><?php echo __('Página individual do produto', 'woocommerce-parcelas'); ?></u></h4>
+                <div class="in_loop">
+                    <h4><u><?php echo __('Página que lista os produtos', 'wc-parcelas'); ?></u></h4>
 
-						<div class="wrapper">
-							<h5><?php echo __('Prefixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(9)); ?>
-							<h5><?php echo __('Preço', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(10)); ?>
-							<h5><?php echo __('Sufixo', 'woocommerce-parcelas') ?></h5>
-							<?php do_settings_fields($this->page, $this->get_fswp_style_sections(11)); ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                    <div class="wrapper">
+                        <h5><?php echo __('Prefixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(6)); ?>
+                        <h5><?php echo __('Preço', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(7)); ?>
+                        <h5><?php echo __('Sufixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(8)); ?>
+                    </div>
+                </div>
 
-		<?php submit_button(); ?>
-	</form>
-	
-	<div class="section">
-		<p><?php echo __('Ajude a manter o WooCommerce Parcelas gratuito fazendo uma doação:', 'woocommerce-parcelas'); ?></p>
-		<iframe style="width:100%; max-width:100%; height:30px;" src="//filipecsweb.com.br/plugin-footer.html" frameborder="0" scrolling="no"></iframe>
+                <div class="in_single">
+                    <h4><u><?php echo __('Página individual do produto', 'wc-parcelas'); ?></u></h4>
 
-		<?php echo '<a class="button-secondary" href="//filipecsweb.com.br/contato" target="_blank">' . __('Bugs e Sugestões', 'woocommerce-parcelas') . '</a>'; ?>
-	</div>
-	
-	<?php do_action('fswp_after_settings_page_submit_button'); ?>
+                    <div class="wrapper">
+                        <h5><?php echo __('Prefixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(9)); ?>
+                        <h5><?php echo __('Preço', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(10)); ?>
+                        <h5><?php echo __('Sufixo', 'wc-parcelas') ?></h5>
+                        <?php do_settings_fields($this->page, $this->get_fswp_style_sections(11)); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="troubleshooting-tab" class="section">
+            <p>Acesse a área oficial de suporte ao plugin WooCommerce Parcelas e poste sua <strong>sugestão</strong>, <strong>crítica</strong> ou <strong>dúvida</strong> por lá. Eu ou outras pessoas sempre estaremos dipostos a te ajudar:</p>
+            <p><a href="https://wordpress.org/support/plugin/woocommerce-parcelas" target="_blank">https://wordpress.org/support/plugin/woocommerce-parcelas</a></p>
+            <hr />
+            <p>Se este plugin é útil para você, considere fazer uma doação e me ajude a mante-lo sempre atualizado:</p>
+            <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BPVZJZ2WG8ZPG" target="_blank">CLIQUE AQUI PARA DOAR</a></p>
+        </div>
+
+        <?php submit_button(); ?>
+    </form>
+
+    <?php do_action('fswp_after_settings_page_submit_button'); ?>
 </div>

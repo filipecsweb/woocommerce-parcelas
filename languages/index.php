@@ -1,1 +1,2 @@
-<?php // May the force of ninja be with you
+<?php
+// May the force of ninja be with you.

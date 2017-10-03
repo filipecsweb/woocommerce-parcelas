@@ -1,11 +1,11 @@
 === WooCommerce Parcelas ===
 
-Contributors: filiprimo, webapex
-Donate link: http://filipecsweb.com.br/doacoes/
+Contributors: filiprimo
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BPVZJZ2WG8ZPG
 Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel, à vista, preço boleto, preço à vista, in cash
-Requires at least: 4.0
-Tested up to: 4.3
-Stable tag: 1.2.8.3
+Requires at least: 4.4
+Tested up to: 4.8
+Stable tag: 1.2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,11 @@ Ainda não, talvez, em breve...
 
 == Changelog ==
 
+= 1.2.9 =
+* Declaração "!important" foi adicionada aos valores das propriedades em CSS;
+* A função depreciada get_product() foi substituída por wc_get_product();
+* O domínio de texto 'woocommerce-parcelas' foi alterado para 'wc-parcelas'.
+
 = 1.2.8 =
 * Corrigido bug que impedia o preço à vista de ser mostrado, em produtos variáveis com preços diferentes, caso o parcelamento estivesse desativado.
 * Adicionada opção para desabilitar o preço parcelado em produtos específicos.
@@ -119,6 +124,9 @@ Ainda não, talvez, em breve...
 * Plugin release.
 
 == Upgrade Notice ==
+
+= 1.2.9 =
+* Atualize com tranquilidade para a última versão do WooCommerce Parcela. Mantenha seu plugin WooCommerce sempre atualizado com a última versão.
 
 = 1.2.8 =
 * Esta versão vem com uma série de correções, otimizações de código e novas opções, atualize sem medo!
