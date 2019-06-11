@@ -9,8 +9,7 @@
  */
 class Woocommerce_Parcelas_Activator {
 
-    public static function activate()
-    {
+	public static function activate() {
 
-    }
+	}
 }

@@ -20,8 +20,7 @@ jQuery(window).load(function () {
 
             if (crude_price <= installment_minimum_value) {
                 installments_html = '';
-            }
-            else if (crude_price > installment_minimum_value) {
+            } else if (crude_price > installment_minimum_value) {
                 var installments_price = crude_price / installment_qty;
                 installments_price = installments_price.toFixed(2);
 
@@ -35,12 +34,10 @@ jQuery(window).load(function () {
 
                     if (installments_price >= installment_minimum_value) {
                         installments_html = installment_prefix + ' ' + parcelas_menor + x_de + ' <span class="amount">' + formatMoney(cur_symbol, installments_price, 2, dec_sep, th_sep, cur_pos) + '</span> ' + installment_suffix;
-                    }
-                    else {
+                    } else {
                         installments_html = '';
                     }
-                }
-                else {
+                } else {
                     installments_html = installment_prefix + ' ' + installment_qty + x_de + ' <span class="amount">' + formatMoney(cur_symbol, installments_price, 2, dec_sep, th_sep, cur_pos) + '</span> ' + installment_suffix;
                 }
             }

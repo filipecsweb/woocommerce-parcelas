@@ -24,8 +24,7 @@ jQuery(window).load(function () {
                 factor = 1 - (factor / 100);
 
                 var discount_price = crude_price * factor;
-            }
-            else if (in_cash_discount_type == 1) { // Fixed
+            } else if (in_cash_discount_type == 1) { // Fixed
                 var discount_price = crude_price - in_cash_discount;
             }
 
