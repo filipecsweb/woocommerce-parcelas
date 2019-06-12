@@ -1,15 +1,14 @@
 jQuery(window).load(function () {
-    (function () {
-        $ = jQuery.noConflict();
-
+    (function ($) {
         function fswp_variable_installment_calculation() {
-            var final_price = $('.single_variation_wrap .price .amount:last').text();
+            let final_price = $('.single_variation_wrap .price .amount:last').text();
             final_price = final_price.match(/\d+/g);
-            var final_price_length = Number(final_price.length);
-            var crude_price = '';
-            var installments_html;
 
-            var i;
+            let final_price_length = Number(final_price.length),
+                crude_price = '',
+                installments_html,
+                i;
+
             for (i = 1; i < final_price_length; i++) {
                 crude_price += final_price[i - 1];
             }
@@ -21,11 +20,11 @@ jQuery(window).load(function () {
             if (crude_price <= installment_minimum_value) {
                 installments_html = '';
             } else if (crude_price > installment_minimum_value) {
-                var installments_price = crude_price / installment_qty;
+                let installments_price = crude_price / installment_qty;
                 installments_price = installments_price.toFixed(2);
 
                 if (installments_price < installment_minimum_value) {
-                    var parcelas_menor = installment_qty;
+                    let parcelas_menor = installment_qty;
                     while (parcelas_menor > 2 && installments_price < installment_minimum_value) {
                         parcelas_menor--;
                         installments_price = crude_price / parcelas_menor;
@@ -45,7 +44,7 @@ jQuery(window).load(function () {
             $('.fswp_variable_installment_calculation').html(installments_html);
         }
 
-        var default_variation = Number($('.single_variation .price').length);
+        let default_variation = Number($('.single_variation .price').length);
 
         if (default_variation) {
             fswp_variable_installment_calculation();
@@ -55,5 +54,5 @@ jQuery(window).load(function () {
                 fswp_variable_installment_calculation();
             }, 100);
         });
-    })();
+    })(jQuery);
 });

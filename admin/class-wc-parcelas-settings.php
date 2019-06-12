@@ -42,7 +42,7 @@ class Woocommerce_Parcelas_Settings {
 	 *
 	 * @var    array $style
 	 */
-	public $stlye;
+	public $style;
 
 	public function __construct() {
 		/**
@@ -419,6 +419,9 @@ class Woocommerce_Parcelas_Settings {
 	}
 
 	public function fswp_checkbox_callback( $args ) {
+		/**
+		 * @var $id
+		 */
 		extract( $args );
 
 		$value = isset( $this->settings[ $id ] ) ? $this->settings[ $id ] : 0;
@@ -428,6 +431,12 @@ class Woocommerce_Parcelas_Settings {
 	}
 
 	public function fswp_text_callback( $args ) {
+		/**
+		 * @var $id
+		 * @var $class
+		 * @var $default
+		 * @var $placeholder
+		 */
 		extract( $args );
 
 		$value = isset( $this->settings[ $id ] ) ? $this->settings[ $id ] : $default;
@@ -437,6 +446,11 @@ class Woocommerce_Parcelas_Settings {
 	}
 
 	public function fswp_number_callback( $args ) {
+		/**
+		 * @var $id
+		 * @var $class
+		 * @var $default
+		 */
 		extract( $args );
 
 		$value = isset( $this->settings[ $id ] ) ? $this->settings[ $id ] : $default;
@@ -446,6 +460,11 @@ class Woocommerce_Parcelas_Settings {
 	}
 
 	public function fswp_select_callback( $args ) {
+		/**
+		 * @var $id
+		 * @var $default
+		 * @var $options
+		 */
 		extract( $args );
 
 		$value = isset( $this->settings[ $id ] ) ? $this->settings[ $id ] : $default;
@@ -459,6 +478,8 @@ class Woocommerce_Parcelas_Settings {
 	}
 
 	public function fswp_options_sanitize( $input ) {
+		$new_input = array();
+
 		foreach ( $input as $k => $v ) {
 			if ( $k == 'installment_qty' ) {
 				if ( $v < 2 || empty( $v ) ) {
@@ -470,10 +491,10 @@ class Woocommerce_Parcelas_Settings {
 				}
 			}
 
-			$newinput[ $k ] = trim( $v );
+			$new_input[ $k ] = trim( $v );
 		}
 
-		return $newinput;
+		return $new_input;
 	}
 }
 

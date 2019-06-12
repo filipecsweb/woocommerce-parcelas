@@ -3,14 +3,15 @@
 /**
  * Add meta box within product page
  *
- * @since       1.2.7
  * @author      Filipe Seabra <filipecseabra@gmail.com>
+ * @since       1.2.7
  * @version     1.2.8
  */
+
 class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings {
 
 	/**
-	 * @var     array $fswp_post_meta_key
+	 * @var     string $fswp_post_meta_key
 	 */
 	public $fswp_post_meta_key = 'fswp_post_meta';
 
@@ -59,8 +60,7 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings {
 		foreach ( $metabox['args']['values'] as $value => $label ) {
 			echo "<p>";
 			echo "<input type='hidden' name='$this->fswp_post_meta_key[$value]' value='0' />";
-			echo "<input type='checkbox' id='$this->fswp_post_meta_key[$value]' name='$this->fswp_post_meta_key[$value]' value='1' " . checked( 1,
-					$this->get_fswp_post_meta_data( $value ), false ) . " />";
+			echo "<input type='checkbox' id='$this->fswp_post_meta_key[$value]' name='$this->fswp_post_meta_key[$value]' value='1' " . checked( 1, $this->get_fswp_post_meta_data( $value ), false ) . " />";
 			echo "<label for='$this->fswp_post_meta_key[$value]'>" . $label . "</label>";
 			echo "</p>";
 		}

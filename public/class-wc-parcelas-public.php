@@ -152,80 +152,68 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 	 *
 	 * @return void
 	 */
-	public function fswp_variable_product_js_variables() {
-		?>
-        <script type="text/javascript">
-            var x_de = <?php echo "'" . __( 'x de', 'wc-parcelas' ) . "'"; ?>;
-            var dec_sep = <?php echo "'" . get_option( 'woocommerce_price_decimal_sep' ) . "'"; ?>;
-            var th_sep = <?php echo "'" . get_option( 'woocommerce_price_thousand_sep' ) . "'"; ?>;
-            var cur_symbol = <?php echo "'" . get_woocommerce_currency_symbol() . "'"; ?>;
-            var cur_pos = <?php echo "'" . get_option( 'woocommerce_currency_pos' ) . "'"; ?>;
+	public function fswp_variable_product_js_variables() { ?>
+        <script>
+            let x_de = <?php echo "'" . __( 'x de', 'wc-parcelas' ) . "'"; ?>;
+            let dec_sep = <?php echo "'" . get_option( 'woocommerce_price_decimal_sep' ) . "'"; ?>;
+            let th_sep = <?php echo "'" . get_option( 'woocommerce_price_thousand_sep' ) . "'"; ?>;
+            let cur_symbol = <?php echo "'" . get_woocommerce_currency_symbol() . "'"; ?>;
+            let cur_pos = <?php echo "'" . get_option( 'woocommerce_currency_pos' ) . "'"; ?>;
 
             function formatMoney(cur_symbol, number, c, d, m, cur_pos) {
                 c = isNaN(c = Math.abs(c)) ? 2 : c,
-                    d = d == undefined ? "." : d,
-                    m = m == undefined ? "," : m,
+                    d = d === undefined ? "." : d,
+                    m = m === undefined ? "," : m,
                     s = number < 0 ? "-" : "",
                     i = parseInt(number = Math.abs(+number || 0).toFixed(c)) + "",
                     j = (j = i.length) > 3 ? j % 3 : 0,
-                    cur_pos = cur_pos == "" ? "left" : cur_pos;
+                    cur_pos = cur_pos === "" ? "left" : cur_pos;
 
-                if (cur_pos == 'left') {
+                if (cur_pos === 'left') {
                     return cur_symbol + s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "");
-                } else if (cur_pos == 'left_space') {
+                } else if (cur_pos === 'left_space') {
                     return cur_symbol + '&nbsp;' + s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "");
-                } else if (cur_pos == 'right') {
+                } else if (cur_pos === 'right') {
                     return s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "") + cur_symbol;
-                } else if (cur_pos == 'right_space') {
+                } else if (cur_pos === 'right_space') {
                     return s + (j ? i.substr(0, j) + m : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + m) + (c ? d + Math.abs(number - i).toFixed(c).slice(2) : "") + '&nbsp;' + cur_symbol;
                 }
-            };
+            }
         </script>
-		<?php
-	}
+	<?php }
 
 	/**
 	 * Calculate and display installments when child products have different prices
 	 *
 	 * @return  void
 	 */
-	public function fswp_variable_installment_calculation() {
-		?>
-        <script type="text/javascript">
-            var installment_prefix = <?php echo "'" . $this->settings['installment_prefix'] . "'"; ?>;
-            var installment_qty = <?php echo $this->settings['installment_qty']; ?>;
-            var installment_suffix = <?php echo "'" . $this->settings['installment_suffix'] . "'"; ?>;
-            var installment_minimum_value = <?php echo isset( $this->settings['installment_minimum_value'] ) ? str_replace( ',', '.',
+	public function fswp_variable_installment_calculation() { ?>
+        <script>
+            let installment_prefix = <?php echo "'" . $this->settings['installment_prefix'] . "'"; ?>;
+            let installment_qty = <?php echo $this->settings['installment_qty']; ?>;
+            let installment_suffix = <?php echo "'" . $this->settings['installment_suffix'] . "'"; ?>;
+            let installment_minimum_value = <?php echo isset( $this->settings['installment_minimum_value'] ) ? str_replace( ',', '.',
 				$this->settings['installment_minimum_value'] ) : 0; ?>;
         </script>
-
         <div class='fswp_variable_installment_calculation'></div>
-
-        <script type="text/javascript"
-                src="<?php echo WC_PARCELAS_URL . 'public/js/variable-installment-calculation.js' ?>"></script>
-		<?php
-	}
+        <script src="<?php echo WC_PARCELAS_URL . 'public/js/variable-installment-calculation.js' ?>"></script>
+	<?php }
 
 	/**
 	 * Calculate and display in cash price when child products have different prices
 	 *
 	 * @return  void
 	 */
-	public function fswp_variable_in_cash_calculation() {
-		?>
-        <script type="text/javascript">
-            var in_cash_prefix = <?php echo "'" . $this->settings['in_cash_prefix'] . "'"; ?>;
-            var in_cash_discount = <?php echo "'" . $this->settings['in_cash_discount'] . "'"; ?>;
-            var in_cash_discount_type = <?php echo $this->settings['in_cash_discount_type']; ?>;
-            var in_cash_suffix = <?php echo "'" . $this->settings['in_cash_suffix'] . "'"; ?>;
+	public function fswp_variable_in_cash_calculation() { ?>
+        <script>
+            let in_cash_prefix = <?php echo "'" . $this->settings['in_cash_prefix'] . "'"; ?>;
+            let in_cash_discount = <?php echo "'" . $this->settings['in_cash_discount'] . "'"; ?>;
+            let in_cash_discount_type = <?php echo (string) $this->settings['in_cash_discount_type']; ?>;
+            let in_cash_suffix = <?php echo "'" . $this->settings['in_cash_suffix'] . "'"; ?>;
         </script>
-
         <div class='fswp_variable_in_cash_calculation'></div>
-
-        <script type="text/javascript"
-                src="<?php echo WC_PARCELAS_URL . 'public/js/variable-in-cash-calculation.js' ?>"></script>
-		<?php
-	}
+        <script src="<?php echo WC_PARCELAS_URL . 'public/js/variable-in-cash-calculation.js' ?>"></script>
+	<?php }
 }
 
 new Woocommerce_Parcelas_Public();

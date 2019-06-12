@@ -8,8 +8,8 @@
  */
 
 $absolute_path = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
-$wp_load       = $absolute_path[0] . 'wp-load.php';
-require_once( $wp_load );
+
+require_once( $absolute_path[0] . 'wp-load.php' );
 
 header( 'Content-type: text/css' );
 header( 'Cache-control: must-revalidate' );
@@ -88,5 +88,3 @@ foreach ( $selectors_for_position as $k => $selector ) {
 	echo "text-align:" . $alignments[ $k ] . ";";
 	echo "}";
 }
-
-exit;
