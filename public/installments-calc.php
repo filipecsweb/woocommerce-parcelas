@@ -58,7 +58,7 @@ if ( 'variable' == $product->get_type() ) {
  *
  * @var     string $price
  */
-$price = wc_get_price_including_tax( $product );
+$price = wc_custom_get_price();
 
 if ( $price <= $min_value ) {
 	$installments_html = '';
