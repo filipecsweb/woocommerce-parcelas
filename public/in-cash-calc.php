@@ -42,7 +42,7 @@ if ( 'variable' == $product->get_type() ) {
  *
  * @var     string $price
  */
-$price = wc_get_price_including_tax( $product );
+$price = wc_custom_get_price();
 
 $factor = str_replace( ',', '.', $discount_value );
 
