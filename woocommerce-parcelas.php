@@ -166,3 +166,16 @@ class WC_Parcelas {
 }
 
 add_action( 'plugins_loaded', array( 'WC_Parcelas', 'get_instance' ) );
+
+function wc_custom_get_price() {
+  if ( function_exists( 'is_woocommerce_active' ) && is_woocommerce_active() ) {
+    global $woocommerce;
+    $version = '3.0';
+    if( version_compare( $woocommerce->version, $version, ">=" ) ) {
+      $price = $product->get_price_including_tax();      
+    }else{
+      $price = wc_get_price_including_tax($product);
+    }
+    return $price;
+  }
+}
