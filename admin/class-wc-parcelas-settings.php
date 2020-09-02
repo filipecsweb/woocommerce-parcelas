@@ -274,7 +274,8 @@ class Woocommerce_Parcelas_Settings {
 					'id'      => 'fswp_in_loop_position',
 					'options' => array(
 						'woocommerce_after_shop_loop_item_title' => 'Posição 1',
-						'woocommerce_after_shop_loop_item'       => 'Posição 2'
+						'woocommerce_after_shop_loop_item'       => 'Posição 2',
+						'woocommerce_get_price_html'             => 'Posição 3'
 					),
 					'desc'    => __( 'Defina a posição das parcelas, dentro das páginas que listam os produtos, e a prioridade dessa posição abaixo. Padrão: 1.',
 						'wc-parcelas' ),
