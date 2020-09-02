@@ -273,8 +273,8 @@ class Woocommerce_Parcelas_Settings {
 				'args'     => array(
 					'id'      => 'fswp_in_loop_position',
 					'options' => array(
-						'woocommerce_after_shop_loop_item_title' => 'Posição 1',
-						'woocommerce_after_shop_loop_item'       => 'Posição 2'
+						'woocommerce_after_shop_loop_item_title' => 'Abaixo do Título do Produto',
+						'woocommerce_after_shop_loop_item'       => 'Abaixo do Produto'
 					),
 					'desc'    => __( 'Defina a posição das parcelas, dentro das páginas que listam os produtos, e a prioridade dessa posição abaixo. Padrão: 1.',
 						'wc-parcelas' ),
@@ -305,11 +305,11 @@ class Woocommerce_Parcelas_Settings {
 				'args'     => array(
 					'id'      => 'fswp_in_single_position',
 					'options' => array(
-						'woocommerce_single_product_summary'    => 'Posição 1',
-						'woocommerce_before_add_to_cart_form'   => 'Posição 2',
-						'woocommerce_before_add_to_cart_button' => 'Posição 3',
-						'woocommerce_after_add_to_cart_button'  => 'Posição 4',
-						'woocommerce_after_add_to_cart_form'    => 'Posição 5'
+						'woocommerce_single_product_summary'    => 'Na descrição curta do produto',
+						'woocommerce_before_add_to_cart_form'   => 'Acima do campo adicionar ao carrinho',
+						'woocommerce_before_add_to_cart_button' => 'Acima do botão adicionar ao carrinho',
+						'woocommerce_after_add_to_cart_button'  => 'Abaixo do botão adicionar ao carrinho',
+						'woocommerce_after_add_to_cart_form'    => 'Abaixo do campo adicionar ao carrinhoo'
 					),
 					'desc'    => __( 'Defina a posição das parcelas, dentro da página do produto, e a prioridade dessa posição abaixo. Padrão: 1.',
 						'wc-parcelas' ),
