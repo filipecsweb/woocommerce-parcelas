@@ -68,7 +68,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 	 *
 	 * @return void.
 	 */
-	public function fswp_in_loop() {
+	public function fswp_in_loop( $price_html = null) {
 		do_action( 'before_installments_in_loop' );
 
 		/**
@@ -88,6 +88,11 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 		if ( ! wc_get_price_including_tax( $product ) ) {
 			return;
 		}
+		
+		if( $price_html ) {
+            		$price_html = '<span class="price">' . $price_html . '</span>';
+			echo $price_html;
+                }
 
 		if ( $this->allow_installments ) {
 			if ( $this->get_fswp_post_meta_data( $this->disable_installments_key ) !== '1' ) {
