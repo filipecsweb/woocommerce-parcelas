@@ -85,7 +85,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 		 */
 		$class = 'loop';
 
-		if ( ! wc_custom_get_price() ) {
+		if ( ! wc_get_price_including_tax() ) {
 			return;
 		}
 
