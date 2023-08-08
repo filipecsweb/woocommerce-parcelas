@@ -85,7 +85,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 		 */
 		$class = 'loop';
 
-		if ( ! wc_get_price_including_tax() ) {
+		if ( !wc_get_price_including_tax($product)) {
 			return;
 		}
 
@@ -187,10 +187,12 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 	 *
 	 * @return  void
 	 */
-	public function fswp_variable_installment_calculation() { ?>
+	public function fswp_variable_installment_calculation() {
+		// Get get_fswp_post_meta_data for installment qty overwrite
+		$installment_qty_overwrite = $this->get_fswp_post_meta_data( $this->custom_installment_qty_key ); ?>
         <script>
             let installment_prefix = <?php echo "'" . $this->settings['installment_prefix'] . "'"; ?>;
-            let installment_qty = <?php echo $this->settings['installment_qty']; ?>;
+            let installment_qty = <?php echo empty($installment_qty_overwrite) ? $this->settings['installment_qty'] : $installment_qty_overwrite; ?>;
             let installment_suffix = <?php echo "'" . $this->settings['installment_suffix'] . "'"; ?>;
             let installment_minimum_value = <?php echo isset( $this->settings['installment_minimum_value'] ) ? str_replace( ',', '.',
 				$this->settings['installment_minimum_value'] ) : 0; ?>;
@@ -204,11 +206,14 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 	 *
 	 * @return  void
 	 */
-	public function fswp_variable_in_cash_calculation() { ?>
+	public function fswp_variable_in_cash_calculation() {
+		// Get get_fswp_post_meta_data for in cash overwrite
+		$in_cash_discount_overwrite = $this->get_fswp_post_meta_data($this->custom_in_cash_discount_key);
+		$in_cash_discount_type_overwrite = $this->get_fswp_post_meta_data($this->custom_in_cash_discount_type_key); ?>
         <script>
             let in_cash_prefix = <?php echo "'" . $this->settings['in_cash_prefix'] . "'"; ?>;
-            let in_cash_discount = <?php echo "'" . $this->settings['in_cash_discount'] . "'"; ?>;
-            let in_cash_discount_type = <?php echo (string) $this->settings['in_cash_discount_type']; ?>;
+            let in_cash_discount = <?php echo "'" . empty($in_cash_discount_overwrite) ? $this->settings['in_cash_discount'] : $in_cash_discount_overwrite . "'"; ?>;
+            let in_cash_discount_type = <?php echo (string) empty($in_cash_discount_type_overwrite) ? $this->settings['in_cash_discount_type'] : $in_cash_discount_type_overwrite; ?>;
             let in_cash_suffix = <?php echo "'" . $this->settings['in_cash_suffix'] . "'"; ?>;
         </script>
         <div class='fswp_variable_in_cash_calculation'></div>

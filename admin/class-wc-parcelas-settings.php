@@ -243,7 +243,7 @@ class Woocommerce_Parcelas_Settings {
 					'id'      => 'in_cash_discount_type',
 					'options' => array(
 						0 => '%',
-						1 => 'fixo'
+						1 => __('fixo', 'wc-parcelas')
 					),
 					'desc'    => __( 'Quer descontar uma porcentagem ou um valor fixo?', 'wc-parcelas' ),
 					'default' => ''

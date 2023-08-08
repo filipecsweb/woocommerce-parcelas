@@ -10,10 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$prefix         = $this->settings['in_cash_prefix'];
-$discount_value = $this->settings['in_cash_discount'];
-$discount_type  = $this->settings['in_cash_discount_type'];
-$suffix         = $this->settings['in_cash_suffix'];
+$prefix        			  = $this->settings['in_cash_prefix'];
+$discount_value_overwrite = $this->get_fswp_post_meta_data($this->custom_in_cash_discount_key);
+$discount_value			  = !isset($discount_value_overwrite) ? $this->settings['in_cash_discount'] : $discount_value_overwrite;
+$discount_type_overwrite  = $this->get_fswp_post_meta_data($this->custom_in_cash_discount_type_key);
+$discount_type 			  = !isset($discount_type_overwrite) ? $this->settings['in_cash_discount_type'] : $discount_type_overwrite;
+$suffix        			  = $this->settings['in_cash_suffix'];
 
 /**
  * @var WC_Product $product
@@ -44,7 +46,7 @@ if ( 'variable' == $product->get_type() ) {
  */
 $price = wc_get_price_including_tax( $product );
 
-$factor = str_replace( ',', '.', $discount_value );
+$factor = (float) str_replace( ',', '.', $discount_value );
 
 if ( $discount_type == 0 ) { // %
 	$factor = 1 - ( $factor / 100 );

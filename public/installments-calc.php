@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $prefix       = $this->settings['installment_prefix'];
-$installments = $this->settings['installment_qty'];
+$installments_overwrite = $this->get_fswp_post_meta_data($this->custom_installment_qty_key);
+$installments = !isset($installments_overwrite) || $installments_overwrite < 2 ? $this->settings['installment_qty'] : $installments_overwrite;
 $suffix       = $this->settings['installment_suffix'];
 $min_value    = isset( $this->settings['installment_minimum_value'] ) ? str_replace( ',', '.', $this->settings['installment_minimum_value'] ) : 0;
 
