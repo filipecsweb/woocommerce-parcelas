@@ -3,7 +3,6 @@
 /**
  * Add meta box within product page
  *
- * @author      Filipe Seabra <filipecseabra@gmail.com>
  * @since       1.2.7
  * @version     1.2.8
  */

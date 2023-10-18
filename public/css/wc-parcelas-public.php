@@ -2,7 +2,6 @@
 /**
  * This file contains CSS (already minified) that is updated through admin
  *
- * @author        Filipe Seabra <filipecseabra@gmail.com>
  * @since         1.2.8
  * @version       1.2.9
  */

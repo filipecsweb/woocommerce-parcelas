@@ -3,7 +3,6 @@
  * This file is responsible for plugin settings form
  *
  * @since         1.2.5.1
- * @author        Filipe Seabra <filipecseabra@gmail.com>
  * @version       1.2.9.1
  */
 

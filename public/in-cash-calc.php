@@ -3,7 +3,6 @@
 /**
  * Do in cash payment calculation
  *
- * @author        Filipe Seabra <filipecseabra@gmail.com>
  * @since         1.2.6
  * @version       1.2.8.2
  */

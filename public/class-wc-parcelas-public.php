@@ -3,7 +3,6 @@
 /**
  * Build functions that will modify frontend
  *
- * @author   Filipe Seabra <filipecseabra@gmail.com>
  * @since    1.0.0
  * @version  1.2.9
  */
