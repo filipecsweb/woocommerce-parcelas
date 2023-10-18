@@ -3,8 +3,8 @@
 /**
  * Build functions that will modify frontend
  *
- * @since    1.0.0
  * @author   Filipe Seabra <filipecseabra@gmail.com>
+ * @since    1.0.0
  * @version  1.2.9
  */
 class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
@@ -60,7 +60,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 	}
 
 	public function public_stylesheet_and_javascript() {
-		wp_enqueue_style( WC_PARCELAS_SLUG . '-public', WC_PARCELAS_URL . 'public/css/wc-parcelas-public.php', array(), WC_PARCELAS_VERSION, 'all' );
+		wp_enqueue_style( WC_PARCELAS_SLUG . '-public', WC_PARCELAS_URL . 'public/css/wc-parcelas-public.php', array(), WC_PARCELAS_VERSION );
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
 		 */
 		$class = 'loop';
 
-		if ( ! wc_get_price_including_tax() ) {
+		if ( ! wc_get_price_including_tax( $product ) ) {
 			return;
 		}
 
@@ -208,7 +208,7 @@ class Woocommerce_Parcelas_Public extends Woocommerce_Parcelas_Meta_Box {
         <script>
             let in_cash_prefix = <?php echo "'" . $this->settings['in_cash_prefix'] . "'"; ?>;
             let in_cash_discount = <?php echo "'" . $this->settings['in_cash_discount'] . "'"; ?>;
-            let in_cash_discount_type = <?php echo (string) $this->settings['in_cash_discount_type']; ?>;
+            let in_cash_discount_type = <?php echo $this->settings['in_cash_discount_type']; ?>;
             let in_cash_suffix = <?php echo "'" . $this->settings['in_cash_suffix'] . "'"; ?>;
         </script>
         <div class='fswp_variable_in_cash_calculation'></div>

@@ -29,7 +29,7 @@ if ( 'variable' == $product->get_type() ) {
 	 *
 	 * @var WC_Product_Variable $product
 	 */
-	if ( $product->get_variation_price( 'min' ) != $product->get_variation_price( 'max' ) ) {
+	if ( $product->get_variation_price() != $product->get_variation_price( 'max' ) ) {
 		/**
 		 * Change prefix name for variable product
 		 *

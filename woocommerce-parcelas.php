@@ -132,7 +132,7 @@ class WC_Parcelas {
 		/**
 		 * Call plugin Stylesheet
 		 */
-		wp_enqueue_style( WC_PARCELAS_SLUG . '-admin', WC_PARCELAS_URL . 'admin/css/wc-parcelas-admin.css', array(), WC_PARCELAS_VERSION, 'all' );
+		wp_enqueue_style( WC_PARCELAS_SLUG . '-admin', WC_PARCELAS_URL . 'admin/css/wc-parcelas-admin.css', array(), WC_PARCELAS_VERSION );
 		wp_enqueue_style( 'wp-color-picker' );
 
 		/**

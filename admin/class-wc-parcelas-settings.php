@@ -370,7 +370,7 @@ class Woocommerce_Parcelas_Settings {
 				$settings_field['section'], $settings_field['args'] );
 		}
 
-		foreach ( $this->get_fswp_style_sections() as $k => $section ) {
+		foreach ( $this->get_fswp_style_sections() as $section ) {
 			foreach ( $this->style as $prop => $data ) {
 				$id = explode( '-', $section );
 

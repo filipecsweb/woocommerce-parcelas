@@ -97,16 +97,19 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </div>
             </div>
         </div>
+
         <div id="troubleshooting-tab" class="section">
-            <p>Acesse a área oficial de suporte ao plugin WooCommerce Parcelas e poste sua <strong>sugestão</strong>, <strong>crítica</strong> ou
-                <strong>dúvida</strong> por lá. Eu ou outras pessoas sempre estaremos dipostos a te ajudar:</p>
-            <p><a href="https://wordpress.org/support/plugin/woocommerce-parcelas" target="_blank">https://wordpress.org/support/plugin/woocommerce-parcelas</a>
+            <p>Acesse a área oficial de suporte ao plugin e poste sua mensagem lá:</p>
+            <p>
+                <a href="https://wordpress.org/support/plugin/woocommerce-parcelas/" target="_blank">https://wordpress.org/support/plugin/woocommerce-parcelas/</a>
             </p>
             <hr/>
             <p>Se este plugin é útil para você, considere fazer uma doação e me ajude a mante-lo sempre atualizado:</p>
-            <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BPVZJZ2WG8ZPG" target="_blank">CLIQUE AQUI PARA DOAR</a>
+            <p>
+                <a href="https://filipeseabra.me/doar/" target="_blank">CLIQUE AQUI PARA DOAR</a>
             </p>
         </div>
+
 		<?php submit_button(); ?>
     </form>
 	<?php do_action( 'fswp_after_settings_page_submit_button' ); ?>

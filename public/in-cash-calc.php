@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Do in cash payment calculation
  *
@@ -27,7 +28,7 @@ if ( 'variable' == $product->get_type() ) {
 	 *
 	 * @var WC_Product_Variable $product
 	 */
-	if ( $product->get_variation_price( 'min' ) != $product->get_variation_price( 'max' ) ) {
+	if ( $product->get_variation_price() != $product->get_variation_price( 'max' ) ) {
 		if ( is_product() ) {
 			/**
 			 * Calculate and display in cash value for each child in variation product
@@ -44,7 +45,7 @@ if ( 'variable' == $product->get_type() ) {
  */
 $price = wc_get_price_including_tax( $product );
 
-$factor = str_replace( ',', '.', $discount_value );
+$factor = max( 0, str_replace( ',', '.', $discount_value ) );
 
 if ( $discount_type == 0 ) { // %
 	$factor = 1 - ( $factor / 100 );
