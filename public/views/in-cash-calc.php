@@ -3,17 +3,15 @@
 defined( 'ABSPATH' ) || exit;
 
 $prefix                   = wcParcelas()->settings->getOption( 'in_cash_prefix' );
-$discount_value_overwrite = wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->custom_in_cash_discount_key );
-$discount_value           = ! $discount_value_overwrite ? wcParcelas()->settings->getOption( 'in_cash_discount' ) : $discount_value_overwrite;
-$discount_type_overwrite  = wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->custom_in_cash_discount_type_key );
-$discount_type            = ! $discount_type_overwrite ? wcParcelas()->settings->getOption( 'in_cash_discount_type' ) : $discount_type_overwrite;
+$discount_value_overwrite = wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->in_cash_discount_key );
+$discount_value           = $discount_value_overwrite ?? wcParcelas()->settings->getOption( 'in_cash_discount' );
+$discount_type_overwrite  = wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->in_cash_discount_type_key );
+$discount_type            = $discount_type_overwrite ?? wcParcelas()->settings->getOption( 'in_cash_discount_type' );
 $suffix                   = wcParcelas()->settings->getOption( 'in_cash_suffix' );
 
 /**
  * @var WC_Product $product
  */
-$product;
-
 if ( 'variable' == $product->get_type() ) {
 	/**
 	 * Deal with in cash value in single variable product

@@ -7,15 +7,15 @@ defined( 'ABSPATH' ) || exit;
 class MetaBox {
 	public string $fswp_post_meta_key = 'fswp_post_meta';
 
+	public string $disable_installments_key = 'disable_installments';
+
+	public string $installment_qty_key = 'installment_qty';
+
 	public string $disable_in_cash_key = 'disable_in_cash';
 
 	public string $in_cash_discount_type_key = 'in_cash_discount_type';
 
 	public string $in_cash_discount_key = 'in_cash_discount';
-
-	public string $disable_installments_key = 'disable_installments';
-
-	public string $installment_qty_key = 'installment_qty';
 
 	public function __construct() {
 		add_action( 'add_meta_boxes', [ $this, 'add_fswp_product_meta_box' ] );
@@ -33,72 +33,141 @@ class MetaBox {
 		);
 	}
 
-	public function fswp_product_meta_box_callback( $post, $metabox ) {
+	public function fswp_product_meta_box_callback() {
 		wp_nonce_field( 'fswp_product_meta_box_nonce_context', 'fswp_product_meta_box_nonce_name' );
 
-		// Disable in cash for this product field
-		echo "<p>";
-			echo "<input type='hidden' name='$this->fswp_post_meta_key[$this->disable_in_cash_key]' value='0' />";
-			echo "<input type='checkbox' id='$this->fswp_post_meta_key[$this->disable_in_cash_key]' name='$this->fswp_post_meta_key[$this->disable_in_cash_key]' value='1' " . checked( 1, $this->get_fswp_post_meta_data($this->disable_in_cash_key ), false ) . " />";
-			echo "<label for='$this->fswp_post_meta_key[$this->disable_in_cash_key]'>" . __('Desativar preço à vista para este produto', 'wc-parcelas') . "</label>";
-		echo "</p>";
-		// Overwrite in cash discount type field
-		$in_cash_discount_type = isset($this->settings[$this->custom_in_cash_discount_type_key]) ? $this->settings[$this->custom_in_cash_discount_type_key] : 0;
-		$in_cash_discount_type_selected = $this->get_fswp_post_meta_data($this->custom_in_cash_discount_type_key) ?: $in_cash_discount_type;
-		echo "<p>";
-			echo "<label for='$this->fswp_post_meta_key[$this->custom_in_cash_discount_type_key]'>" . __('Sobreescrever o tipo de desconto à vista global', 'wc-parcelas') . ":</label> ";
-			echo "<select id='$this->fswp_post_meta_key[$this->custom_in_cash_discount_type_key]' name='$this->fswp_post_meta_key[$this->custom_in_cash_discount_type_key]'>";
-				echo "<option value='0' " . selected($in_cash_discount_type_selected, 0, false ) . ">" . '%' . ($in_cash_discount_type==0 ? ' ('. __('global', 'wc-parcelas') . ')' : '') . "</option>";
-				echo "<option value='1' " . selected($in_cash_discount_type_selected, 1, false ) . ">" . __('fixo', 'wc-parcelas') . ($in_cash_discount_type == 1 ? ' (' . __('global', 'wc-parcelas') . ')' : '') . "</option>";
-			echo "</select>";
-		echo "</p>";
-		// Overwrite in cash discount field
-		$in_cash_discount = isset($this->settings[$this->custom_in_cash_discount_key]) ? $this->settings[$this->custom_in_cash_discount_key] : false;
-		echo "<p>";
-			echo "<label for='$this->fswp_post_meta_key[$this->custom_in_cash_discount_key]'>" . __('Sobreescrever o desconto à vista global', 'wc-parcelas') . ":</label> ";
-			echo "<input type='number' id='$this->fswp_post_meta_key[$this->custom_in_cash_discount_key]' name='$this->fswp_post_meta_key[$this->custom_in_cash_discount_key]' value='" . $this->get_fswp_post_meta_data($this->custom_in_cash_discount_key) . "' min='0' step='0.01' placeholder='". $in_cash_discount ."' />";
-		echo "</p>";
-		// Disable installments for this product field
-		echo "<p>";
-			echo "<input type='hidden' name='$this->fswp_post_meta_key[$this->disable_installments_key]' value='0' />";
-			echo "<input type='checkbox' id='$this->fswp_post_meta_key[$this->disable_installments_key]' name='$this->fswp_post_meta_key[$this->disable_installments_key]' value='1' " . checked( 1, $this->get_fswp_post_meta_data($this->disable_installments_key ), false ) . " />";
-			echo "<label for='$this->fswp_post_meta_key[$this->disable_installments_key]'>" . __('Desativar preço parcelado para este produto', 'wc-parcelas') . "</label>";
-		echo "</p>";
-		// Overwrite installments qty field
-		$installment_qty = isset($this->settings[$this->custom_installment_qty_key]) ? $this->settings[$this->custom_installment_qty_key] : false;
-		echo "<p>";
-			echo "<label for='$this->fswp_post_meta_key[$this->custom_installment_qty_key]'>" . __('Sobreescrever a quantidade de parcelas global', 'wc-parcelas') . ":</label> ";
-			echo "<input type='number' id='$this->fswp_post_meta_key[$this->custom_installment_qty_key]' name='$this->fswp_post_meta_key[$this->custom_installment_qty_key]' value='" . $this->get_fswp_post_meta_data($this->custom_installment_qty_key) . "' min='0' step='1' placeholder='". $installment_qty ."' />";
-		echo "</p>";
+		$disable_installments  = $this->get_fswp_post_meta_data( $this->disable_installments_key ) ?? '0';
+		$installment_qty       = $this->get_fswp_post_meta_data( $this->installment_qty_key ) ?? '';
+		$disable_in_cash       = $this->get_fswp_post_meta_data( $this->disable_in_cash_key ) ?? '0';
+		$in_cash_discount      = $this->get_fswp_post_meta_data( $this->in_cash_discount_key ) ?? '';
+		$in_cash_discount_type = $this->get_fswp_post_meta_data( $this->in_cash_discount_type_key );
+        ?>
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th><?php echo __( 'Opções para parcelamento', 'wc-parcelas' ) ?></th>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for='<?php echo "$this->fswp_post_meta_key[$this->disable_installments_key]" ?>'>
+						<?php _e( 'Desativar preço parcelado para este produto?', 'wc-parcelas' ) ?>
+                    </label>
+                </td>
+                <td>
+                    <select class="regular-text"
+                            id='<?php echo "$this->fswp_post_meta_key[$this->disable_installments_key]" ?>'
+                            name='<?php echo "$this->fswp_post_meta_key[$this->disable_installments_key]" ?>'
+                    >
+                        <option value='0' <?php echo selected( $disable_installments, '0' ) ?>><?php _e( 'Não', 'wc-parcelas' ) ?></option>
+                        <option value='1' <?php echo selected( $disable_installments, '1' ) ?>><?php _e( 'Sim', 'wc-parcelas' ) ?></option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for='<?php echo "$this->fswp_post_meta_key[$this->installment_qty_key]" ?>'>
+			            <?php _e( 'Quantidade de parcelas', 'wc-parcelas' ) ?>
+                    </label>
+                </td>
+                <td>
+                    <input class="regular-text"
+                           type='number'
+                           id='<?php echo "$this->fswp_post_meta_key[$this->installment_qty_key]" ?>'
+                           name='<?php echo "$this->fswp_post_meta_key[$this->installment_qty_key]" ?>'
+                           value='<?php echo $installment_qty ?>'
+                           min="1"
+                    />
+                    <p class="howto">
+                        <?php _e( 'Deixe em branco para usar o valor padrão.', 'wc-parcelas' ) ?><br>
+                        <?php _e( 'Use apenas separador decimal, não use separador de milhar. Ex.: 4 ou 4,5.', 'wc-parcelas' ) ?>
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <th><?php echo __( 'Opções para pagamento à vista', 'wc-parcelas' ) ?></th>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for='<?php echo "$this->fswp_post_meta_key[$this->disable_in_cash_key]" ?>'>
+			            <?php _e( 'Desativar preço à vista para este produto?', 'wc-parcelas' ) ?>
+                    </label>
+                </td>
+                <td>
+                    <select class="regular-text"
+                            id='<?php echo "$this->fswp_post_meta_key[$this->disable_in_cash_key]" ?>'
+                            name='<?php echo "$this->fswp_post_meta_key[$this->disable_in_cash_key]" ?>'
+                    >
+                        <option value='0' <?php echo selected( $disable_in_cash, '0' ) ?>><?php _e( 'Não', 'wc-parcelas' ) ?></option>
+                        <option value='1' <?php echo selected( $disable_in_cash, '1' ) ?>><?php _e( 'Sim', 'wc-parcelas' ) ?></option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_key]" ?>'>
+			            <?php _e( 'Valor do desconto', 'wc-parcelas' ) ?>
+                    </label>
+                </td>
+                <td>
+                    <input class="regular-text"
+                           type='text'
+                           id='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_key]" ?>'
+                           name='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_key]" ?>'
+                           value='<?php echo $in_cash_discount ?>'
+                   />
+                    <p class="howto"><?php _e( 'Deixe em branco para usar o valor padrão.', 'wc-parcelas' ) ?></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_type_key]" ?>'>
+			            <?php _e( 'Tipo do desconto', 'wc-parcelas' ) ?>
+                    </label>
+                </td>
+                <td>
+                    <select class="regular-text"
+                            id='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_type_key]" ?>'
+                            name='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_type_key]" ?>'
+                    >
+                        <option value='default'><?php _e( 'Padrão', 'wc-parcelas' ) ?></option>
+                        <option value='0' <?php echo selected( $in_cash_discount_type, '0' ) ?>>%</option>
+                        <option value='1' <?php echo selected( $in_cash_discount_type, '1' ) ?>><?php _e( 'fixo', 'wc-parcelas' ); ?></option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+		<?php
 	}
 
 	/**
-	 * Get fswp post meta value
-	 *
-	 * @param  string $value meta_value name
-	 * @param  string  $field  meta_value name
-	 *
-	 * @return  string  $fswp_post_meta_data[$field]    meta_value field
+	 * @param  string $field Field name.
+	 * @return mixed|null
 	 */
 	public function get_fswp_post_meta_data( $field ) {
-		$post_id = get_the_ID();
-
-		if ( null != get_post_meta( $post_id, $this->fswp_post_meta_key ) ) {
-			$fswp_post_meta_data = get_post_meta( $post_id, $this->fswp_post_meta_key, true );
-
-			return isset($fswp_post_meta_data[$field]) ? $fswp_post_meta_data[$field] : false;
+		$post_meta = (array) get_post_meta( get_the_ID(), $this->fswp_post_meta_key, true );
+		if (
+			! isset( $post_meta[ $field ] ) ||
+			'' === $post_meta[ $field ]
+		) {
+			return null;
 		}
 
-		return false;
+		return $post_meta[ $field ];
 	}
 
 	public function save_fswp_product_meta_box( $post_id ) {
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['fswp_product_meta_box_nonce_name'] ) || ! wp_verify_nonce( $_POST['fswp_product_meta_box_nonce_name'],
-				'fswp_product_meta_box_nonce_context' ) ) {
+		if (
+			defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ||
+			! isset( $_POST['fswp_product_meta_box_nonce_name'] ) ||
+			! wp_verify_nonce( $_POST['fswp_product_meta_box_nonce_name'], 'fswp_product_meta_box_nonce_context' )
+		) {
 			return;
 		}
 
@@ -106,12 +175,22 @@ class MetaBox {
 			return;
 		}
 
-		if ( null != get_post_meta( $post_id, $this->fswp_post_meta_key ) ) {
-			update_post_meta( $post_id, $this->fswp_post_meta_key, $_POST[ $this->fswp_post_meta_key ] );
-		} else {
-			if ( isset( $_POST[ $this->fswp_post_meta_key ] ) ) {
-				add_post_meta( $post_id, $this->fswp_post_meta_key, $_POST[ $this->fswp_post_meta_key ], true );
+		if ( isset( $_POST[ $this->fswp_post_meta_key ] ) && is_array( $_POST[ $this->fswp_post_meta_key ] ) ) {
+			foreach ( $_POST[ $this->fswp_post_meta_key ] as $k => $value ) {
+				switch ( $k ) {
+					case $this->disable_installments_key:
+					case $this->installment_qty_key:
+					case $this->disable_in_cash_key:
+					case $this->in_cash_discount_key:
+						$_POST[ $this->fswp_post_meta_key ][ $k ] = trim( sanitize_text_field( $value ) );
+						break;
+					case $this->in_cash_discount_type_key:
+						$_POST[ $this->fswp_post_meta_key ][ $k ] = trim( sanitize_text_field( $value ) ) === 'default' ? null : trim( sanitize_text_field( $value ) );
+						break;
+				}
 			}
+
+			update_post_meta( $post_id, $this->fswp_post_meta_key, $_POST[ $this->fswp_post_meta_key ] );
 		}
 	}
 }
