@@ -6,7 +6,7 @@ Tags: parcelas, parcelamento, parcelar, a vista, boleto, installments, in cash, 
 Tested up to: 6.3
 Requires at least: 5.4
 Requires PHP: 7.4
-Stable tag: 1.3
+Stable tag: 1.3.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
