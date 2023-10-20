@@ -1,13 +1,14 @@
 === WooCommerce Parcelas ===
 
 Contributors: filiprimo
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BPVZJZ2WG8ZPG
-Tags: parcelas, parcelamento, pagamento, payment, installments, woocommerce, parcela produto variavel, à vista, preço boleto, preço à vista, in cash
-Requires at least: 4.4
-Tested up to: 4.8
-Stable tag: 1.2.9.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://filipeseabra.me/doar/
+Tags: parcelas, parcelamento, parcelar, a vista, boleto, installments, in cash, financed
+Tested up to: 6.3
+Requires at least: 5.4
+Requires PHP: 7.4
+Stable tag: 1.3.1
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 

@@ -1,6 +1,6 @@
 # WooCommerce Parcelas
 
-Let you set an in cash price and a financed price to your products.
+Allows you to set an in cash price and a financed price to your products.
 
 ### Prerequisites
 
@@ -9,7 +9,7 @@ You have to install this plugin in an WordPress installation running <a href='ht
 ### Installing
 
 * Go to Plugins > Add New.
-* Search for woocommerce parcelas.
+* Search for "WooCommerce parcelas".
 * When you see it, click on Install Now, wait and then active it.
 
 ## Built With
@@ -20,14 +20,8 @@ The CMS the plugin was built to.
 [gulp.js](https://gulpjs.com/)  
 The toolkit to automate tasks like minifying.
 
-<a href='https://browserstack.com'><img src='https://goo.gl/28nGQU' alt='BrowserStack' height='60'/></a>  
+![](https://browserstack.wpenginepowered.com/wp-content/themes/browserstack/img/bstack-logo-global.svg)   
 BrowserStack is a testing platform that makes sure this plugin runs correctly in every browser. They also love open source projects!
-
-## Authors
-
-* [filipecsweb](https://github.com/filipecsweb)
-
-See also the list of [contributors](https://github.com/filipecsweb/woocommerce-parcelas/graphs/contributors) who participated in this project.
 
 ## License
 
