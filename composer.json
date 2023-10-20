@@ -1,0 +1,24 @@
+{
+  "name": "filipecsweb/wc-parcelas",
+  "type": "project",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Filipe Seabra"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "WcParcelas\\App\\": "app/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "require": {
+    "league/container": "^4.2"
+  }
+}
