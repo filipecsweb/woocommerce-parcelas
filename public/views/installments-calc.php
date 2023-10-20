@@ -2,18 +2,19 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$prefix       = wcParcelas()->settings->getOption('installment_prefix');
-$installments = wcParcelas()->settings->getOption('installment_qty');
-$suffix       = wcParcelas()->settings->getOption('installment_suffix');
-$min_value    = wcParcelas()->settings->getOption('installment_minimum_value') ? str_replace( ',', '.', wcParcelas()->settings->getOption('installment_minimum_value') ) : 0;
+$prefix                 = wcParcelas()->settings->getOption( 'installment_prefix' );
+$installments_overwrite = wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->installment_qty_key );
+$installments           = ! empty( $installments_overwrite ) ? $installments_overwrite : wcParcelas()->settings->getOption( 'installment_qty' );
+$suffix                 = wcParcelas()->settings->getOption( 'installment_suffix' );
+$min_value              = wcParcelas()->settings->getOption( 'installment_minimum_value' )
+	? str_replace( ',', '.', wcParcelas()->settings->getOption( 'installment_minimum_value' ) )
+	: 0;
 
 $formatted_installments_price = '';
 
 /**
  * @var WC_Product $product
  */
-$product;
-
 if ( 'variable' == $product->get_type() ) {
 	/**
 	 * Deal with installments in single variable product
@@ -45,16 +46,11 @@ if ( 'variable' == $product->get_type() ) {
 	$prefix = apply_filters( 'fswp_grouped_prefix', __( 'A partir de', 'wc-parcelas' ) );
 }
 
-/**
- * Get product final price
- *
- * @var     string $price
- */
 $price = wc_get_price_including_tax( $product );
 
 if ( $price <= $min_value ) {
 	$installments_html = '';
-} elseif ( $price > $min_value ) {
+} else {
 	$installments_price           = $price / $installments;
 	$formatted_installments_price = wc_price( $price / $installments );
 
