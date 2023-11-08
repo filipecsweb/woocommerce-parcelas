@@ -3,7 +3,7 @@
 Contributors: filiprimo
 Donate link: https://filipeseabra.me/doar/
 Tags: parcelas, parcelamento, parcelar, a vista, boleto, installments, in cash, financed
-Tested up to: 6.3
+Tested up to: 6.4
 Requires at least: 5.4
 Requires PHP: 7.4
 Stable tag: 1.3.2
