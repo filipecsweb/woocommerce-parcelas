@@ -137,8 +137,8 @@ class FrontEnd {
             let installment_suffix = <?php echo "'" . wcParcelas()->settings->getOption( 'installment_suffix' ) . "'"; ?>;
             let installment_minimum_value = <?php echo "'" . wcParcelas()->settings->getOption( 'installment_minimum_value' ) ? str_replace( ',', '.', wcParcelas()->settings->getOption( 'installment_minimum_value' ) ) : 0 . "'"; ?>;
         </script>
+        <script async defer src="<?php echo WC_PARCELAS_URL, 'public/scripts/variable-installment-calculation.js?v=', WC_PARCELAS_VERSION ?>"></script>
         <div class='fswp_variable_installment_calculation'></div>
-        <script async defer src="<?php echo WC_PARCELAS_URL . 'public/scripts/variable-installment-calculation.js' ?>"></script>
 	<?php }
 
 	/**
@@ -157,7 +157,7 @@ class FrontEnd {
             let in_cash_discount_type = <?php echo "'" . $in_cash_discount_type . "'"; ?>;
             let in_cash_suffix = <?php echo "'" . wcParcelas()->settings->getOption( 'in_cash_suffix' ) . "'"; ?>;
         </script>
+        <script async defer src="<?php echo WC_PARCELAS_URL, 'public/scripts/variable-in-cash-calculation.js?v=', WC_PARCELAS_VERSION ?>"></script>
         <div class='fswp_variable_in_cash_calculation'></div>
-        <script async defer src="<?php echo WC_PARCELAS_URL . 'public/scripts/variable-in-cash-calculation.js' ?>"></script>
 	<?php }
 }
