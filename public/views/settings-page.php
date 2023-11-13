@@ -11,16 +11,16 @@ defined( 'ABSPATH' ) || exit;
         <a href="#general-tab" class="nav-tab nav-tab-active"><?php echo __( 'Geral', 'wc-parcelas' ); ?></a>
         <a href="#position-tab" class="nav-tab"><?php echo __( 'Posição', 'wc-parcelas' ); ?></a>
         <a href="#style-tab" class="nav-tab"><?php echo __( 'Estilo', 'wc-parcelas' ); ?></a>
-        <a href="#troubleshooting-tab" class="nav-tab"><?php echo __( 'Solucionar problemas', 'wc-parcelas' ); ?></a>
+        <a href="#troubleshooting-tab" class="nav-tab"><?php echo __( 'Solucionar Problemas', 'wc-parcelas' ); ?></a>
     </h2>
     <form action="<?php echo admin_url( 'options.php' ) ?>" method="post">
 		<?php settings_fields( $this->option_group ); ?>
         <div id="general-tab" class="section active">
-            <h3><?php echo __( 'Opções para parcelamento', 'wc-parcelas' ); ?></h3>
+            <h3><?php echo __( 'Opções de Parcelamento', 'wc-parcelas' ); ?></h3>
             <table class="form-table">
 				<?php do_settings_fields( $this->page, 'section_general-installments' ); ?>
             </table>
-            <h3><?php echo __( 'Opções para pagamento à vista', 'wc-parcelas' ); ?></h3>
+            <h3><?php echo __( 'Opções de Pagamento à Vista', 'wc-parcelas' ); ?></h3>
             <table class="form-table">
 				<?php do_settings_fields( $this->page, 'section_general-in_cash' ); ?>
             </table>

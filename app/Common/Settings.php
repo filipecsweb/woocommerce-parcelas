@@ -125,7 +125,7 @@ class Settings {
 					'label_for'   => 'installment_prefix',
 					'default'     => '',
 					'class'       => 'regular-text',
-					'desc'        => __( 'Escreva o texto que deve vir logo antes da quantidade. Ex.: Em at&eacute; ou Parcele em.', 'wc-parcelas' ),
+					'desc'        => __( 'Escreva o texto que deve vir logo antes da quantidade. Ex.: Em até; ou Parcele em.', 'wc-parcelas' ),
 					'placeholder' => ''
 				)
 			),
@@ -139,8 +139,7 @@ class Settings {
 					'id'        => 'installment_qty',
 					'label_for' => 'installment_qty',
 					'default'   => 2,
-					'class'     => '',
-					'desc'      => __( 'Insira a quantidade de parcelas. Valor m&iacute;nimo: 2.', 'wc-parcelas' )
+					'desc'      => __( 'Insira a quantidade de parcelas. Valor mínimo: 2.', 'wc-parcelas' )
 				)
 			),
 			array(
@@ -154,13 +153,13 @@ class Settings {
 					'label_for'   => 'installment_suffix',
 					'default'     => '',
 					'class'       => 'regular-text',
-					'desc'        => __( 'Escreva o texto que deve vir logo depois do pre&ccedil;o. Ex.: sem juros ou s/ juros', 'wc-parcelas' ),
+					'desc'        => __( 'Escreva o texto que deve vir logo depois do preço. Ex.: sem juros ou s/ juros', 'wc-parcelas' ),
 					'placeholder' => ''
 				)
 			),
 			array(
 				'id'       => 'installment_minimum_value',
-				'title'    => __( 'Valor m&iacute;nimo de cada parcela', 'wc-parcelas' ),
+				'title'    => __( 'Valor mínimo de cada parcela', 'wc-parcelas' ),
 				'callback' => [ $this, 'fswp_text_callback' ],
 				'page'     => $this->page,
 				'section'  => 'section_general-installments',
@@ -168,9 +167,7 @@ class Settings {
 					'id'          => 'installment_minimum_value',
 					'label_for'   => 'installment_minimum_value',
 					'default'     => 0,
-					'class'       => '',
-					'desc'        => __( 'Caso o preço de cada parcela tenha um valor mínimo insira-o aqui. Ex.: 5 ou 5,95.<br />Use apenas separador decimal, não use separador de milhar.',
-						'wc-parcelas' ),
+					'desc'        => __( 'Caso o preço de cada parcela tenha um valor mínimo insira-o aqui. Ex.: 5 ou 5,95.<br />Use apenas separador decimal, não use separador de milhar.', 'wc-parcelas' ),
 					'placeholder' => ''
 				)
 			),
@@ -195,7 +192,7 @@ class Settings {
 				'args'     => array(
 					'id'          => 'in_cash_prefix',
 					'label_for'   => 'in_cash_prefix',
-					'class'       => '',
+					'class'       => 'regular-text',
 					'desc'        => __( 'Escreva o texto que deve vir logo antes do preço à vista. Ex.: ou', 'wc-parcelas' ),
 					'default'     => '',
 					'placeholder' => ''
@@ -210,7 +207,6 @@ class Settings {
 				'args'     => array(
 					'id'          => 'in_cash_discount',
 					'label_for'   => 'in_cash_discount',
-					'class'       => '',
 					'desc'        => __( 'Use apenas separador decimal, não use separador de milhar. Ex.: 4 ou 4,5.', 'wc-parcelas' ),
 					'default'     => '',
 					'placeholder' => ''
@@ -241,7 +237,7 @@ class Settings {
 				'args'     => array(
 					'id'          => 'in_cash_suffix',
 					'label_for'   => 'in_cash_suffix',
-					'class'       => '',
+					'class'       => 'regular-text',
 					'desc'        => __( 'Escreva o texto que deve vir logo depois do preço à vista. Ex.: à vista ou no boleto.', 'wc-parcelas' ),
 					'default'     => '',
 					'placeholder' => ''
@@ -259,8 +255,7 @@ class Settings {
 						'woocommerce_after_shop_loop_item_title' => 'Abaixo do Título do Produto',
 						'woocommerce_after_shop_loop_item'       => 'Abaixo do Produto'
 					),
-					'desc'    => __( 'Defina a posição das parcelas, dentro das páginas que listam os produtos, e a prioridade dessa posição abaixo. Padrão: 1.',
-						'wc-parcelas' ),
+					'desc'    => __( 'Defina a posição das parcelas, dentro das páginas que listam os produtos, e a prioridade dessa posição abaixo. Padrão: 1.', 'wc-parcelas' ),
 					'default' => ''
 				)
 			),
@@ -273,10 +268,8 @@ class Settings {
 				'args'     => array(
 					'id'        => 'fswp_in_loop_position_level',
 					'label_for' => 'fswp_in_loop_position_level',
-					'class'     => 'fswp_position_priority',
 					'default'   => 15,
-					'desc'      => __( 'Seu tema e/ou outros plugins podem disputar uma mesma posição. Use este campo para definir a prioridade para a posição das parcelas. Quanto maior o número, maior a prioridade. Padrão: 15.',
-						'wc-parcelas' )
+					'desc'      => __( 'Seu tema e/ou outros plugins podem disputar uma mesma posição. Use este campo para definir a prioridade para a posição das parcelas. Quanto maior o número, maior a prioridade. Padrão: 15.', 'wc-parcelas' )
 				)
 			),
 			array(
@@ -294,8 +287,7 @@ class Settings {
 						'woocommerce_after_add_to_cart_button'  => 'Abaixo do botão adicionar ao carrinho',
 						'woocommerce_after_add_to_cart_form'    => 'Abaixo do campo adicionar ao carrinhoo'
 					),
-					'desc'    => __( 'Defina a posição das parcelas, dentro da página do produto, e a prioridade dessa posição abaixo. Padrão: 1.',
-						'wc-parcelas' ),
+					'desc'    => __( 'Defina a posição das parcelas, dentro da página do produto, e a prioridade dessa posição abaixo. Padrão: 1.', 'wc-parcelas' ),
 					'default' => ''
 				)
 			),
@@ -308,10 +300,8 @@ class Settings {
 				'args'     => array(
 					'id'        => 'fswp_in_single_position_level',
 					'label_for' => 'fswp_in_single_position_level',
-					'class'     => 'fswp_position_priority',
 					'default'   => 15,
-					'desc'      => __( 'Seu tema e/ou outros plugins podem disputar uma mesma posição. Use este campo para definir a prioridade para a posição das parcelas. Quanto maior o número, maior a prioridade. Padrão: 15.',
-						'wc-parcelas' )
+					'desc'      => __( 'Seu tema e/ou outros plugins podem disputar uma mesma posição. Use este campo para definir a prioridade para a posição das parcelas. Quanto maior o número, maior a prioridade. Padrão: 15.', 'wc-parcelas' )
 				)
 			),
 			array(
@@ -349,8 +339,7 @@ class Settings {
 		);
 
 		foreach ( $settings_fields as $settings_field ) {
-			add_settings_field( $settings_field['id'], $settings_field['title'], $settings_field['callback'], $settings_field['page'],
-				$settings_field['section'], $settings_field['args'] );
+			add_settings_field( $settings_field['id'], $settings_field['title'], $settings_field['callback'], $settings_field['page'], $settings_field['section'], $settings_field['args'] );
 		}
 
 		foreach ( $this->get_fswp_style_sections() as $section ) {
@@ -409,8 +398,10 @@ class Settings {
 
 		$value = wcParcelas()->settings->getOption( $id ) ? wcParcelas()->settings->getOption( $id ) : 0;
 
-		echo "<input type='checkbox' id='" . $id . "-0' name='" . $this->option_name . "[$id]' value='1'" . checked( '1', $value, false ) . " />";
-		echo isset( $desc ) ? "<span class='description'> $desc</span>" : '';
+		echo "<label for='$id-0'>";
+		echo "<input type='checkbox' id='", $id, "-0' name='", $this->option_name, "[$id]' value='1'", checked( '1', $value, false ), " />";
+		echo $desc ?? '';
+		echo "</label>";
 	}
 
 	public function fswp_text_callback( $args ) {
@@ -424,8 +415,8 @@ class Settings {
 
 		$value = wcParcelas()->settings->getOption( $id ) ? wcParcelas()->settings->getOption( $id ) : $default;
 
-		echo "<input class='$class' type='text' id='$id' name='" . $this->option_name . "[$id]' value='$value' placeholder='$placeholder' />";
-		echo isset( $desc ) ? "<br /><span class='description'>$desc</span>" : '';
+		echo "<input class='", $class ?? '', "' type='text' id='$id' name='", $this->option_name, "[$id]' value='$value' placeholder='$placeholder' />";
+		echo isset( $desc ) ? "<p class='description'>$desc</p>" : '';
 	}
 
 	public function fswp_number_callback( $args ) {
@@ -438,8 +429,8 @@ class Settings {
 
 		$value = wcParcelas()->settings->getOption( $id ) ? wcParcelas()->settings->getOption( $id ) : $default;
 
-		echo "<input class='$class' type='number' id='$id' name='" . $this->option_name . "[$id]' value='$value' />";
-		echo isset( $desc ) ? "<br /><span class='description'>$desc</span>" : '';
+		echo "<input class='", $class ?? '', "' type='number' id='$id' name='", $this->option_name, "[$id]' value='$value' />";
+		echo isset( $desc ) ? "<p class='description'>$desc</p>" : '';
 	}
 
 	public function fswp_select_callback( $args ) {
@@ -452,12 +443,12 @@ class Settings {
 
 		$value = wcParcelas()->settings->getOption( $id ) ? wcParcelas()->settings->getOption( $id ) : $default;
 
-		echo "<select name='" . $this->option_name . "[$id]'>";
+		echo "<select class='", $class ?? '', "' name='", $this->option_name, "[$id]'>";
 		foreach ( $options as $k => $option ) {
 			echo "<option value='$k'" . selected( $k, $value, false ) . ">" . $option . "</option>";
 		}
 		echo "</select>";
-		echo isset( $desc ) ? "<br /><span class='description'>$desc</span>" : '';
+		echo isset( $desc ) ? "<p class='description'>$desc</p>" : '';
 	}
 
 	public function fswp_options_sanitize( $input ) {

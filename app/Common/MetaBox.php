@@ -25,7 +25,7 @@ class MetaBox {
 	public function add_fswp_product_meta_box() {
 		add_meta_box(
 			'fswp_product_meta_box',
-			__( 'Parcelamento e pagamento à vista', 'wc-parcelas' ),
+			__( 'Parcelamento e Pagamento à Vista', 'wc-parcelas' ),
 			[ $this, 'fswp_product_meta_box_callback' ],
 			'product',
 			'normal',
@@ -45,7 +45,7 @@ class MetaBox {
         <table class="form-table">
             <tbody>
             <tr>
-                <th><?php echo __( 'Opções para parcelamento', 'wc-parcelas' ) ?></th>
+                <th><?php echo __( 'Opções de Parcelamento', 'wc-parcelas' ) ?></th>
             </tr>
 
             <tr>
@@ -55,8 +55,7 @@ class MetaBox {
                     </label>
                 </td>
                 <td>
-                    <select class="regular-text"
-                            id='<?php echo "$this->fswp_post_meta_key[$this->disable_installments_key]" ?>'
+                    <select id='<?php echo "$this->fswp_post_meta_key[$this->disable_installments_key]" ?>'
                             name='<?php echo "$this->fswp_post_meta_key[$this->disable_installments_key]" ?>'
                     >
                         <option value='0' <?php echo selected( $disable_installments, '0' ) ?>><?php _e( 'Não', 'wc-parcelas' ) ?></option>
@@ -72,22 +71,21 @@ class MetaBox {
                     </label>
                 </td>
                 <td>
-                    <input class="regular-text"
-                           type='number'
+                    <input type='number'
                            id='<?php echo "$this->fswp_post_meta_key[$this->installment_qty_key]" ?>'
                            name='<?php echo "$this->fswp_post_meta_key[$this->installment_qty_key]" ?>'
                            value='<?php echo $installment_qty ?>'
                            min="1"
                     />
-                    <p class="howto">
-                        <?php _e( 'Deixe em branco para usar o valor padrão.', 'wc-parcelas' ) ?><br>
-                        <?php _e( 'Use apenas separador decimal, não use separador de milhar. Ex.: 4 ou 4,5.', 'wc-parcelas' ) ?>
+                    <p class="description">
+                        <?php _e( 'Insira a quantidade de parcelas. Valor mínimo: 2.', 'wc-parcelas' ) ?><br>
+                        <?php _e( 'Deixe em branco para usar o valor global.', 'wc-parcelas' ) ?>
                     </p>
                 </td>
             </tr>
 
             <tr>
-                <th><?php echo __( 'Opções para pagamento à vista', 'wc-parcelas' ) ?></th>
+                <th><?php echo __( 'Opções de Pagamento à Vista', 'wc-parcelas' ) ?></th>
             </tr>
 
             <tr>
@@ -97,8 +95,7 @@ class MetaBox {
                     </label>
                 </td>
                 <td>
-                    <select class="regular-text"
-                            id='<?php echo "$this->fswp_post_meta_key[$this->disable_in_cash_key]" ?>'
+                    <select id='<?php echo "$this->fswp_post_meta_key[$this->disable_in_cash_key]" ?>'
                             name='<?php echo "$this->fswp_post_meta_key[$this->disable_in_cash_key]" ?>'
                     >
                         <option value='0' <?php echo selected( $disable_in_cash, '0' ) ?>><?php _e( 'Não', 'wc-parcelas' ) ?></option>
@@ -114,13 +111,15 @@ class MetaBox {
                     </label>
                 </td>
                 <td>
-                    <input class="regular-text"
-                           type='text'
+                    <input type='text'
                            id='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_key]" ?>'
                            name='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_key]" ?>'
                            value='<?php echo $in_cash_discount ?>'
                    />
-                    <p class="howto"><?php _e( 'Deixe em branco para usar o valor padrão.', 'wc-parcelas' ) ?></p>
+                    <p class="description">
+                        <?php _e( 'Use apenas separador decimal, não use separador de milhar. Ex.: 4 ou 4,5.', 'wc-parcelas' ) ?><br>
+                        <?php _e( 'Deixe em branco para usar o valor global.', 'wc-parcelas' ) ?>
+                    </p>
                 </td>
             </tr>
 
@@ -131,14 +130,17 @@ class MetaBox {
                     </label>
                 </td>
                 <td>
-                    <select class="regular-text"
-                            id='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_type_key]" ?>'
+                    <select id='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_type_key]" ?>'
                             name='<?php echo "$this->fswp_post_meta_key[$this->in_cash_discount_type_key]" ?>'
                     >
                         <option value='default'><?php _e( 'Padrão', 'wc-parcelas' ) ?></option>
                         <option value='0' <?php echo selected( $in_cash_discount_type, '0' ) ?>>%</option>
                         <option value='1' <?php echo selected( $in_cash_discount_type, '1' ) ?>><?php _e( 'fixo', 'wc-parcelas' ); ?></option>
                     </select>
+                    <p class="description">
+		                <?php _e( 'Quer descontar uma porcentagem ou um valor fixo?', 'wc-parcelas' ) ?><br>
+		                <?php _e( 'Mantenha "Padrão" para usar o valor global.', 'wc-parcelas' ) ?>
+                    </p>
                 </td>
             </tr>
             </tbody>
