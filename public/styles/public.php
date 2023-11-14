@@ -46,7 +46,7 @@ foreach ( $selectors_for_style as $k => $selector ) {
 	echo $selector . "{";
 
 	foreach ( $style[ $k ] as $prop => $value ) {
-		if ( empty( $value ) || $value === 'inherit' ) {
+		if ( ! empty( $value ) && 'inherit' !== $value ) {
 			echo $prop . ":" . "$value" . "!important;";
 		}
 	}
