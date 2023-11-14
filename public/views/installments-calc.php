@@ -33,7 +33,7 @@ if ( 'variable' == $product->get_type() ) {
 
 	if ( is_product() ) {
 		/**
-		 * Calculate and display installmentes for each child in variation product
+		 * Calculate and display installments for each child in variation product
 		 */
 		add_action( 'woocommerce_before_single_variation', [ $this, 'fswp_variable_installment_calculation' ], 99 );
 	}
