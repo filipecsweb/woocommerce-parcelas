@@ -78,6 +78,7 @@ class ComposerStaticInitd7818d62ffc34ba6b5d1d0d62731f2e4
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
         'WcParcelas\\App\\Common\\FrontEnd' => __DIR__ . '/../..' . '/app/Common/FrontEnd.php',
+        'WcParcelas\\App\\Common\\Helpers\\Woo' => __DIR__ . '/../..' . '/app/Common/Helpers/Woo.php',
         'WcParcelas\\App\\Common\\MetaBox' => __DIR__ . '/../..' . '/app/Common/MetaBox.php',
         'WcParcelas\\App\\Common\\Settings' => __DIR__ . '/../..' . '/app/Common/Settings.php',
         'WcParcelas\\App\\Common\\Utils' => __DIR__ . '/../..' . '/app/Common/Utils.php',

@@ -104,14 +104,14 @@ class Settings {
 		$settings_fields = array(
 			array(
 				'id'       => 'enable_installments',
-				'title'    => __( 'Habilitar', 'wc-parcelas' ),
+				'title'    => __( 'Habilitar?', 'wc-parcelas' ),
 				'callback' => [ $this, 'fswp_checkbox_callback' ],
 				'page'     => $this->page,
 				'section'  => 'section_general-installments',
 				'args'     => array(
 					'id'        => 'enable_installments',
 					'label_for' => 'enable_installments',
-					'desc'      => __( 'Marque para ativar.', 'wc-parcelas' )
+					'desc'      => __( 'Marque para ativar', 'wc-parcelas' )
 				)
 			),
 			array(
@@ -172,15 +172,30 @@ class Settings {
 				)
 			),
 			array(
+				'id'       => 'enable_installments_if_out_of_stock',
+				'title'    => __( 'Habilitar nos produtos fora de estoque?', 'wc-parcelas' ),
+				'callback' => [ $this, 'fswp_select_callback' ],
+				'page'     => $this->page,
+				'section'  => 'section_general-installments',
+				'args'     => array(
+					'id'      => 'enable_installments_if_out_of_stock',
+					'options' => array(
+						'no'  => 'Não',
+						'yes' => 'Sim',
+					),
+					'default' => 'no'
+				)
+			),
+			array(
 				'id'       => 'enable_in_cash',
-				'title'    => __( 'Habilitar', 'wc-parcelas' ),
+				'title'    => __( 'Habilitar?', 'wc-parcelas' ),
 				'callback' => [ $this, 'fswp_checkbox_callback' ],
 				'page'     => $this->page,
 				'section'  => 'section_general-in_cash',
 				'args'     => array(
 					'id'        => 'enable_in_cash',
 					'label_for' => 'enable_in_cash',
-					'desc'      => __( 'Marque para ativar.', 'wc-parcelas' )
+					'desc'      => __( 'Marque para ativar', 'wc-parcelas' )
 				)
 			),
 			array(
@@ -335,7 +350,22 @@ class Settings {
 					),
 					'default' => ''
 				)
-			)
+			),
+			array(
+				'id'       => 'enable_in_cash_if_out_of_stock',
+				'title'    => __( 'Habilitar nos produtos fora de estoque?', 'wc-parcelas' ),
+				'callback' => [ $this, 'fswp_select_callback' ],
+				'page'     => $this->page,
+				'section'  => 'section_general-in_cash',
+				'args'     => array(
+					'id'      => 'enable_in_cash_if_out_of_stock',
+					'options' => array(
+						'no'  => 'Não',
+						'yes' => 'Sim',
+					),
+					'default' => 'no'
+				)
+			),
 		);
 
 		foreach ( $settings_fields as $settings_field ) {

@@ -8,6 +8,8 @@ defined( 'ABSPATH' ) || exit;
  * Service class for utilities.
  */
 class Utils {
+	use Helpers\Woo;
+
 	/**
 	 * @param  string $template_name Template name.
 	 * @param  array  $args          Arguments.
