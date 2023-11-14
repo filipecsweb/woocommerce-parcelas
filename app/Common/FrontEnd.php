@@ -19,15 +19,14 @@ class FrontEnd {
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'public_stylesheet_and_javascript' ] );
 
-		// The tag below is loaded by WooCommerce only in varable products that have children with different prices
+		// The tag below is loaded by WooCommerce only in variable products that have children with different prices
 		// The priority is 98 because the function below will load necessary variables to do the calculation
 		// The action with priority 99 is located under the individual files that are doing the calculation
+        // @TODO Both this hook and the one above should be removed in case the both outputs end up not being done (because e.g. the product is out of stock).
 		add_action( 'woocommerce_before_single_variation', [ $this, 'fswp_variable_product_js_variables' ], 98 );
 
-		// Add installments to archive pages.
 		add_action( wcParcelas()->settings->getOption( 'fswp_in_loop_position' ), [ $this, 'fswp_in_loop' ], wcParcelas()->settings->getOption( 'fswp_in_loop_position_level' ) );
 
-		// Add installments to single pages.
 		add_action( wcParcelas()->settings->getOption( 'fswp_in_single_position' ), [ $this, 'fswp_in_single' ], wcParcelas()->settings->getOption( 'fswp_in_single_position_level' ) );
 	}
 
@@ -48,15 +47,28 @@ class FrontEnd {
 			return;
 		}
 
-		if ( wcParcelas()->settings->getOption( 'enable_installments' ) ) {
-			if ( wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_installments_key ) !== '1' ) {
-				include WC_PARCELAS_PATH . 'public/views/installments-calc.php';
-			}
+        // @TODO The condition to output the installments and in cash price should be a helper.
+		if (
+			wcParcelas()->settings->getOption( 'enable_installments' ) &&
+			wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_installments_key ) !== '1'
+		) {
+			if (
+				wcParcelas()->utils->isProductInStock( $product ) ||
+				'yes' === wcParcelas()->settings->getOption( 'enable_installments_if_out_of_stock' )
+			) {
+			    include WC_PARCELAS_PATH . 'public/views/installments-calc.php';
+            }
 		}
 
-		if ( wcParcelas()->settings->getOption( 'enable_in_cash' ) ) {
-			if ( wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_in_cash_key ) !== '1' ) {
-				include WC_PARCELAS_PATH . 'public/views/in-cash-calc.php';
+		if (
+			wcParcelas()->settings->getOption( 'enable_in_cash' ) &&
+			wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_in_cash_key ) !== '1'
+		) {
+			if (
+				wcParcelas()->utils->isProductInStock( $product ) ||
+				'yes' === wcParcelas()->settings->getOption( 'enable_in_cash_if_out_of_stock' )
+			) {
+			    include WC_PARCELAS_PATH . 'public/views/in-cash-calc.php';
 			}
 		}
 
@@ -72,17 +84,26 @@ class FrontEnd {
 		$product = wc_get_product();
 		$class   = 'single';
 
-		if ( wcParcelas()->settings->getOption( 'enable_installments' ) ) {
-			if ( wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_installments_key ) !== '1' ) {
+		if (
+			wcParcelas()->settings->getOption( 'enable_installments' ) &&
+			wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_installments_key ) !== '1'
+		) {
+			if (
+				wcParcelas()->utils->isProductInStock( $product ) ||
+				'yes' === wcParcelas()->settings->getOption( 'enable_installments_if_out_of_stock' )
+			) {
 				include WC_PARCELAS_PATH . 'public/views/installments-calc.php';
 			}
 		}
 
-		/**
-		 * If in cash option is enabled in backend
-		 */
-		if ( wcParcelas()->settings->getOption( 'enable_in_cash' ) ) {
-			if ( wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_in_cash_key ) !== '1' ) {
+		if (
+			wcParcelas()->settings->getOption( 'enable_in_cash' ) &&
+			wcParcelas()->metaBox->get_fswp_post_meta_data( wcParcelas()->metaBox->disable_in_cash_key ) !== '1'
+		) {
+			if (
+				wcParcelas()->utils->isProductInStock( $product ) ||
+				'yes' === wcParcelas()->settings->getOption( 'enable_in_cash_if_out_of_stock' )
+			) {
 				include WC_PARCELAS_PATH . 'public/views/in-cash-calc.php';
 			}
 		}
@@ -137,8 +158,8 @@ class FrontEnd {
             let installment_suffix = <?php echo "'" . wcParcelas()->settings->getOption( 'installment_suffix' ) . "'"; ?>;
             let installment_minimum_value = <?php echo "'" . wcParcelas()->settings->getOption( 'installment_minimum_value' ) ? str_replace( ',', '.', wcParcelas()->settings->getOption( 'installment_minimum_value' ) ) : 0 . "'"; ?>;
         </script>
+        <script async defer src="<?php echo WC_PARCELAS_URL, 'public/scripts/variable-installment-calculation.js?v=', WC_PARCELAS_VERSION ?>"></script>
         <div class='fswp_variable_installment_calculation'></div>
-        <script async defer src="<?php echo WC_PARCELAS_URL . 'public/scripts/variable-installment-calculation.js' ?>"></script>
 	<?php }
 
 	/**
@@ -157,7 +178,7 @@ class FrontEnd {
             let in_cash_discount_type = <?php echo "'" . $in_cash_discount_type . "'"; ?>;
             let in_cash_suffix = <?php echo "'" . wcParcelas()->settings->getOption( 'in_cash_suffix' ) . "'"; ?>;
         </script>
+        <script async defer src="<?php echo WC_PARCELAS_URL, 'public/scripts/variable-in-cash-calculation.js?v=', WC_PARCELAS_VERSION ?>"></script>
         <div class='fswp_variable_in_cash_calculation'></div>
-        <script async defer src="<?php echo WC_PARCELAS_URL . 'public/scripts/variable-in-cash-calculation.js' ?>"></script>
 	<?php }
 }

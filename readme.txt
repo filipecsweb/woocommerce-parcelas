@@ -6,7 +6,7 @@ Tags: parcelas, parcelamento, parcelar, a vista, boleto, installments, in cash, 
 Tested up to: 6.4
 Requires at least: 5.4
 Requires PHP: 7.4
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,6 +75,10 @@ Ainda não, talvez, em breve...
 5. Página indivudual do produto (backend)
 
 == Changelog ==
+
+= 1.3.4 =
+* Adiciona versao na query string dos arquivos js, carregados no produto variavel, para evitar cache.
+* Cria opcao "Habilitar nos produtos fora de estoque?".
 
 = 1.3.3 =
 * Corrige erro javascript quando o produto variavel possuia preços iguais.
