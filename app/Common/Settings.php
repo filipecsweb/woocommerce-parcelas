@@ -300,7 +300,7 @@ class Settings {
 						'woocommerce_before_add_to_cart_form'   => 'Acima do campo adicionar ao carrinho',
 						'woocommerce_before_add_to_cart_button' => 'Acima do botão adicionar ao carrinho',
 						'woocommerce_after_add_to_cart_button'  => 'Abaixo do botão adicionar ao carrinho',
-						'woocommerce_after_add_to_cart_form'    => 'Abaixo do campo adicionar ao carrinhoo'
+						'woocommerce_after_add_to_cart_form'    => 'Abaixo do campo adicionar ao carrinho'
 					),
 					'desc'    => __( 'Defina a posição das parcelas, dentro da página do produto, e a prioridade dessa posição abaixo. Padrão: 1.', 'wc-parcelas' ),
 					'default' => ''
